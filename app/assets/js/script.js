@@ -1,5 +1,6 @@
 const leftButton = document.getElementById("leftButton");
 const rightButton = document.getElementById("rightButton");
+const cardContent = document.getElementById("content");
 const h1 = document.getElementById("h1");
 const h2 = document.getElementById("h2");
 const p = document.getElementById("p");
@@ -89,9 +90,7 @@ h2.textContent = informations[i].h2;
 p.textContent = informations[i].p;
 h3.textContent = informations[i].h3;
 button1.textContent = informations[i].button1;
-button1.id = "buttonFalse";
 button2.textContent = informations[i].button2;
-button2.id = "buttonTrue";
 h41.textContent = informations[i].h41;
 
 
@@ -130,8 +129,10 @@ rightButton.addEventListener("click", function(event) {
     }
 
     if (i > 1) {
-        document.body.appendChild(button1);
-        document.body.appendChild(button2);
+        cardContent.appendChild(button1);
+        cardContent.appendChild(button2);
+        button1.id = "buttonFalse";
+        button2.id = "buttonTrue";
         button1.style.display = "inline-block";
         button2.style.display = "inline-block";
     }
@@ -188,13 +189,13 @@ button2.addEventListener("click", function(event) {
             console.log(fuite + " Fuite");
         } else if (questionListAgressive.includes(i-2) === true) {
             agressive = agressive + 1;
-            console.log(agressive + " Agressive");
+            console.log(agressive + " Agressivité");
         } else if (questionListManipulation.includes(i-2) === true) {
             manipulation = manipulation + 1;
-            console.log(manipulation + " Manupulation");
+            console.log(manipulation + " Manipulation");
         } else if (questionListAssertive.includes(i-2) === true) {
             assertive = assertive + 1;
-            console.log(assertive + " Assertive");
+            console.log(assertive + " Assertivité");
         } else {
             console.log("Error");
         };
@@ -221,15 +222,16 @@ button1.addEventListener("click", function(event) {
             console.log(fuite + " Fuite");
         } else if (questionListAgressive.includes(i-2) === true) {
             agressive = agressive + 0;
-            console.log(agressive + " Agressive");
+            console.log(agressive + " Agressivité");
         } else if (questionListManipulation.includes(i-2) === true) {
             manipulation = manipulation + 0;
-            console.log(manipulation + " Manupulation");
+            console.log(manipulation + " Manipulation");
         } else if (questionListAssertive.includes(i-2) === true) {
             assertive = assertive + 0;
-            console.log(assertive + " Assertive");
+            console.log(assertive + " Assertivité");
         } else {
             console.log("Error");
         };
     };
 });
+
