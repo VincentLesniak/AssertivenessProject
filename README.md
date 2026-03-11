@@ -1,6 +1,6 @@
 # AssertivenessProject : Auto-diagnostic d'Assertivité (🛠️en developpement🛠️)
 
-Avant propos: C'est en soit ma première idée pour répondre au besoin d'un questionnaire fait sur papier à la base. Elle est en date du début de mon entrée dans le developpement, je dois la finir, mais le temps reste précieux et ça viendra quand ça viendra.
+Avant propos: C'est en soit ma première idée pour répondre au besoin d'un questionnaire fait sur papier à la base. Elle est en date du début de mon entrée dans le developpement, je dois la finaliser, mais le temps reste précieux et ça viendra quand ça viendra.
 
 Lien vers le projet : [Assertiveness Project](https://vincentlesniak.github.io/AssertivenessProject/app/) (le projet est en developpement)
 
