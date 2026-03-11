@@ -4,7 +4,6 @@ Avant propos: C'est en soit ma première idée pour répondre au besoin d'un que
 
 <img width="396" height="470" alt="image" src="https://github.com/user-attachments/assets/d1f7ad46-0dd9-4919-b95a-c0aeab8900e9" />
 <img width="394" height="342" alt="image" src="https://github.com/user-attachments/assets/87dc7f53-fc46-48b5-a720-0fd06d88185a" />
-<img width="396" height="470" alt="image" src="https://github.com/user-attachments/assets/09397814-69a2-4099-bb1a-c6824df1e502" />
 
 Lien vers le projet : [Assertiveness Project](https://vincentlesniak.github.io/AssertivenessProject/app/) (le projet est en developpement)
 
