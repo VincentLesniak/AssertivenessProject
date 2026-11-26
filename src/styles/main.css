@@ -25,12 +25,19 @@ body {
 #h2,
 #p,
 #h3,
-#h41,
 #h42 {
     width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Les boutons restent cliquables même si un texte long les recouvre */
+#leftButton,
+#rightButton,
+#buttonFalse,
+#buttonTrue {
+    z-index: 1;
 }
 
 #leftButton {
@@ -58,26 +65,48 @@ body {
     width: 42%;
 }
 
-#buttonTrue {
+#buttonFalse {
     position: absolute;
     bottom: 35%;
     left: 3%;
 }
 
-#buttonFalse {
+#buttonTrue {
     position: absolute;
     bottom: 35%;
     right: 3%;
 }
 
+/* Réponse déjà donnée (couleurs prévues en v0.4.0) */
+.is-selected {
+    font-weight: bold;
+    border: 3px solid currentColor;
+}
+
+#progress {
+    position: absolute;
+    top: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+#scores {
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    line-height: 2;
+}
+
+[hidden] {
+    display: none !important;
+}
+
 #h3 {
     position: absolute;
     bottom: 35%;
-}
-
-#h41 {
-    position: absolute;
-    bottom: 20%;
 }
 
 #h42 {

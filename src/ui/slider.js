@@ -1,92 +1,99 @@
 /**
- * Diaporama du test : accueil, règles, puis une diapositive par question.
- * v0.1.0 reproduit le comportement de l'ancienne version (app/assets/js/script.js).
- * Les corrections (fin du test, retour arrière) arrivent en v0.2.0.
+ * Affichage du test : accueil, règles, 60 questions, puis écran de résultats.
+ * Toute la logique (réponses, navigation, scores) est dans core/quiz.js.
  */
-import { addAnswer, createEmptyScores } from "../core/scoring.js";
-
-/** Construit la liste des diapositives à partir des données. */
-export function buildSlides(content, questions) {
-    const questionSlides = questions.map((question) => ({
-        title: `QUESTION ${question.id}`,
-        text: question.text,
-        question,
-    }));
-    // La dernière diapositive vide reproduit la fin actuelle du test.
-    return [...content.introSlides, ...questionSlides, {}];
-}
+import { CATEGORIES } from "../core/scoring.js";
+import * as Quiz from "../core/quiz.js";
 
 export function startSlider(root, content, questions) {
     const el = {
-        left: root.querySelector("#leftButton"),
-        right: root.querySelector("#rightButton"),
+        previous: root.querySelector("#leftButton"),
+        next: root.querySelector("#rightButton"),
         title: root.querySelector("#h1"),
         subtitle: root.querySelector("#h2"),
         text: root.querySelector("#p"),
         note: root.querySelector("#h3"),
         credit: root.querySelector("#h42"),
+        progress: root.querySelector("#progress"),
+        progressBar: root.querySelector("#progressBar"),
+        progressText: root.querySelector("#progressText"),
+        scores: root.querySelector("#scores"),
+        answerFalse: root.querySelector("#buttonFalse"),
+        answerTrue: root.querySelector("#buttonTrue"),
     };
 
-    const falseButton = document.createElement("button");
-    falseButton.id = "buttonFalse";
-    const trueButton = document.createElement("button");
-    trueButton.id = "buttonTrue";
-    root.append(falseButton, trueButton);
-
-    const slides = buildSlides(content, questions);
-    const firstQuestionIndex = content.introSlides.length;
-    let index = 0;
-    let hasStarted = false;
-    let scores = createEmptyScores();
+    let quiz = Quiz.createQuiz(content.introSlides.length, questions);
 
     function show(element, visible) {
-        element.style.display = visible ? "inline-block" : "none";
+        element.hidden = !visible;
+    }
+
+    function renderAnswerButton(button, label, selected) {
+        button.textContent = label;
+        button.classList.toggle("is-selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
+    }
+
+    function renderScores() {
+        const values = Quiz.scores(quiz);
+        const maximum = questions.length / CATEGORIES.length;
+        el.scores.replaceChildren(
+            ...CATEGORIES.map((category) => {
+                const item = document.createElement("li");
+                item.textContent = `${content.results.categoryLabels[category]} : ${values[category]} / ${maximum}`;
+                return item;
+            }),
+        );
     }
 
     function render() {
-        const slide = slides[index];
-        el.title.textContent = slide.title ?? "";
-        el.subtitle.textContent = slide.subtitle ?? "";
-        el.text.textContent = slide.text ?? "";
-        el.note.textContent = slide.note ?? "";
-        el.credit.textContent = hasStarted ? content.credit : "";
+        const kind = Quiz.currentKind(quiz);
+        const question = Quiz.currentQuestion(quiz);
+        const intro = kind === "intro" ? content.introSlides[quiz.index] : {};
 
-        const isQuestionArea = index >= firstQuestionIndex;
-        falseButton.textContent = slide.question ? content.answers.false : "";
-        trueButton.textContent = slide.question ? content.answers.true : "";
+        el.title.textContent =
+            kind === "intro"
+                ? intro.title
+                : kind === "question"
+                  ? `QUESTION ${question.id}`
+                  : content.results.scoresTitle;
+        el.subtitle.textContent = intro.subtitle ?? "";
+        el.text.textContent = question ? question.text : "";
+        el.note.textContent = intro.note ?? "";
+        el.credit.textContent = content.credit;
 
-        show(el.left, index > 0);
-        show(el.right, !isQuestionArea);
-        show(falseButton, isQuestionArea);
-        show(trueButton, isQuestionArea);
+        const position = Quiz.progress(quiz);
+        show(el.progress, position !== null);
+        if (position) {
+            el.progressBar.max = position.total;
+            el.progressBar.value = position.current;
+            el.progressText.textContent = `Question ${position.current} / ${position.total}`;
+        }
+
+        show(el.scores, kind === "results");
+        if (kind === "results") {
+            renderScores();
+        }
+
+        const answered = Quiz.currentAnswer(quiz);
+        show(el.answerFalse, kind === "question");
+        show(el.answerTrue, kind === "question");
+        renderAnswerButton(el.answerFalse, content.answers.false, answered === false);
+        renderAnswerButton(el.answerTrue, content.answers.true, answered === true);
+
+        show(el.previous, Quiz.canGoPrevious(quiz));
+        show(el.next, Quiz.canGoNext(quiz));
     }
 
-    function goTo(newIndex) {
-        if (newIndex < 0 || newIndex > slides.length - 1) {
-            return;
-        }
-        index = newIndex;
-        if (index > 0) {
-            hasStarted = true;
-        }
+    function update(newQuiz) {
+        quiz = newQuiz;
         render();
     }
 
-    function answer(isTrue) {
-        const { question } = slides[index];
-        if (!question) {
-            return;
-        }
-        scores = addAnswer(scores, question, isTrue);
-        // Comme avant, les scores ne sont visibles que dans la console.
-        console.log(`Question ${question.id} :`, scores);
-        goTo(index + 1);
-    }
-
-    el.right.addEventListener("click", () => goTo(index + 1));
-    el.left.addEventListener("click", () => goTo(index - 1));
-    trueButton.addEventListener("click", () => answer(true));
-    falseButton.addEventListener("click", () => answer(false));
+    el.previous.addEventListener("click", () => update(Quiz.goPrevious(quiz)));
+    el.next.addEventListener("click", () => update(Quiz.goNext(quiz)));
+    el.answerFalse.addEventListener("click", () => update(Quiz.answer(quiz, false)));
+    el.answerTrue.addEventListener("click", () => update(Quiz.answer(quiz, true)));
 
     render();
 }
