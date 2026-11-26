@@ -39,6 +39,26 @@
                 "Posez-vous la question suivante : « est-ce que les situations où j’adopte l’une de ces postures non assertives ont des caractéristiques communes (contexte, enjeux, interlocuteurs, etc...) ? ». Listez ensuite ces caractéristiques et faites le lien avec votre Histoire : tirer votre fil d’Ariane;",
                 "il vous appartient de modifier ou pas ces attitudes, cherchez votre gain et ne cherchez pas à aller trop vite. On ne change pas pour les autres mais pour soi..."
             ]
-        }
+        },
+        "postures": {
+            "flight": {
+                "title": "Réagir à la pression en s'effaçant",
+                "text": "Face à une tension, vous préférez souvent éviter le conflit : vous dites oui pour ne pas déplaire, vous gardez votre avis pour vous ou vous remettez la décision à plus tard. Cette prudence apaise sur le moment, mais elle laisse vos besoins de côté et peut nourrir frustration et anxiété. Repérer les situations où vous vous taisez est un premier pas pour oser vous positionner."
+            },
+            "aggression": {
+                "title": "Réagir à la pression en attaquant",
+                "text": "Quand vous vous sentez contrarié, vous avez tendance à imposer votre point de vue, à couper la parole ou à hausser le ton. Cette énergie vous aide à avancer et à défendre vos idées, mais elle peut blesser, braquer vos interlocuteurs et dégrader la confiance. Prendre un temps avant de répondre et écouter jusqu'au bout permet de garder votre force sans écraser l'autre."
+            },
+            "manipulation": {
+                "title": "Réagir à la pression par des détours",
+                "text": "Pour obtenir ce que vous voulez, vous passez volontiers par des chemins indirects : sous-entendus, flatterie, informations distillées au bon moment. Cette habileté relationnelle est réelle, mais lorsqu'elle est découverte, elle abîme durablement la confiance. Dire clairement ce que vous voulez et pourquoi est souvent plus efficace qu'une stratégie cachée."
+            },
+            "assertiveness": {
+                "title": "S'affirmer en respectant l'autre",
+                "text": "Vous savez exprimer vos opinions, vos besoins et vos désaccords de façon directe et calme, tout en tenant compte de ceux des autres. Vous cherchez des solutions où chacun s'y retrouve plutôt qu'un gagnant et un perdant. C'est la posture la plus adaptée pour coopérer durablement : continuez à l'entretenir, surtout dans les situations où l'enjeu est fort."
+            }
+        },
+        "chartHint": "Touchez une posture pour lire son explication.",
+        "restart": "Recommencer"
     }
 }

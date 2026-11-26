@@ -3,7 +3,8 @@
  * Fonctions pures : chaque action retourne un nouvel état, sans toucher au DOM.
  *
  * Les diapositives sont, dans l'ordre : les diapositives d'introduction,
- * une diapositive par question, puis la diapositive de résultats.
+ * une diapositive par question, puis les écrans de résultats
+ * (grille d'analyse, histogramme, conclusion).
  */
 import { computeScores } from "./scoring.js";
 
@@ -12,20 +13,32 @@ export function createQuiz(introCount, questions) {
     return { introCount, questions, index: 0, answers: {} };
 }
 
-/** Nombre total de diapositives (introduction + questions + résultats). */
+/** Écrans affichés après la dernière question, dans l'ordre. */
+export const RESULT_SCREENS = ["grid", "scores", "conclusion"];
+
+/** Nombre total de diapositives (introduction + questions + écrans de résultats). */
 export function slideCount(quiz) {
-    return quiz.introCount + quiz.questions.length + 1;
+    return quiz.introCount + quiz.questions.length + RESULT_SCREENS.length;
 }
 
-/** Type de la diapositive courante : "intro", "question" ou "results". */
+/**
+ * Type de la diapositive courante : "intro", "question",
+ * ou l'un des écrans de résultats ("grid", "scores", "conclusion").
+ */
 export function currentKind(quiz) {
     if (quiz.index < quiz.introCount) {
         return "intro";
     }
-    if (quiz.index < quiz.introCount + quiz.questions.length) {
+    const afterQuestions = quiz.index - quiz.introCount - quiz.questions.length;
+    if (afterQuestions < 0) {
         return "question";
     }
-    return "results";
+    return RESULT_SCREENS.at(afterQuestions);
+}
+
+/** Vrai sur l'un des écrans de résultats. */
+export function isResultScreen(quiz) {
+    return RESULT_SCREENS.includes(currentKind(quiz));
 }
 
 /** Question affichée, ou null hors des questions. */
@@ -43,16 +56,15 @@ export function canGoPrevious(quiz) {
     return quiz.index > 0;
 }
 
-/** On avance librement dans l'introduction ; sur une question, seulement si elle a une réponse. */
+/**
+ * On avance librement dans l'introduction et les résultats ;
+ * sur une question, seulement si elle a une réponse ; jamais après la conclusion.
+ */
 export function canGoNext(quiz) {
-    const kind = currentKind(quiz);
-    if (kind === "intro") {
-        return true;
-    }
-    if (kind === "question") {
+    if (currentKind(quiz) === "question") {
         return currentAnswer(quiz) !== undefined;
     }
-    return false;
+    return quiz.index < slideCount(quiz) - 1;
 }
 
 export function goPrevious(quiz) {
@@ -85,6 +97,11 @@ export function progress(quiz) {
     return question
         ? { current: quiz.index - quiz.introCount + 1, total: quiz.questions.length }
         : null;
+}
+
+/** Efface les réponses et revient à l'accueil. */
+export function restart(quiz) {
+    return createQuiz(quiz.introCount, quiz.questions);
 }
 
 /** Scores calculés à partir des réponses actuelles. */
