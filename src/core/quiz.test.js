@@ -8,9 +8,11 @@ import {
     currentAnswer,
     currentKind,
     currentQuestion,
+    isResultScreen,
     goNext,
     goPrevious,
     progress,
+    restart,
     scores,
     slideCount,
 } from "./quiz.js";
@@ -19,8 +21,8 @@ const start = () => createQuiz(2, questions);
 const toFirstQuestion = () => goNext(goNext(start()));
 
 describe("navigation", () => {
-    it("compte 2 diapositives d'intro, 60 questions et 1 écran de résultats", () => {
-        expect(slideCount(start())).toBe(63);
+    it("compte 2 diapositives d'intro, 60 questions et 3 écrans de résultats", () => {
+        expect(slideCount(start())).toBe(65);
     });
 
     it("commence sur l'accueil, sans retour possible", () => {
@@ -70,20 +72,36 @@ describe("réponses", () => {
         expect(scores(quiz).flight).toBe(0);
     });
 
-    it("affiche les résultats après la question 60", () => {
+    it("enchaîne grille, résultats et conclusion après la question 60", () => {
         let quiz = toFirstQuestion();
         for (let i = 0; i < 60; i++) {
             quiz = answer(quiz, true);
         }
-        expect(currentKind(quiz)).toBe("results");
+        expect(currentKind(quiz)).toBe("grid");
+        expect(isResultScreen(quiz)).toBe(true);
         expect(progress(quiz)).toBeNull();
-        expect(canGoNext(quiz)).toBe(false);
         expect(canGoPrevious(quiz)).toBe(true);
+        quiz = goNext(quiz);
+        expect(currentKind(quiz)).toBe("scores");
+        quiz = goNext(quiz);
+        expect(currentKind(quiz)).toBe("conclusion");
+        expect(canGoNext(quiz)).toBe(false);
+        expect(goNext(quiz)).toBe(quiz);
         expect(scores(quiz)).toEqual({
             flight: 15,
             aggression: 15,
             manipulation: 15,
             assertiveness: 15,
         });
+    });
+});
+
+describe("recommencer", () => {
+    it("efface les réponses et revient à l'accueil", () => {
+        const quiz = restart(answer(toFirstQuestion(), true));
+        expect(quiz.index).toBe(0);
+        expect(quiz.answers).toEqual({});
+        expect(currentKind(quiz)).toBe("intro");
+        expect(isResultScreen(quiz)).toBe(false);
     });
 });

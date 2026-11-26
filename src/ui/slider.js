@@ -1,9 +1,10 @@
 /**
- * Affichage du test : accueil, règles, 60 questions, puis écran de résultats.
+ * Affichage du test : accueil, règles, 60 questions, puis les écrans de résultats.
  * Toute la logique (réponses, navigation, scores) est dans core/quiz.js.
  */
 import { CATEGORIES } from "../core/scoring.js";
 import * as Quiz from "../core/quiz.js";
+import { renderConclusion, renderGrid, renderScores } from "./results-screens.js";
 
 export function startSlider(root, content, questions) {
     const el = {
@@ -17,12 +18,15 @@ export function startSlider(root, content, questions) {
         progress: root.querySelector("#progress"),
         progressBar: root.querySelector("#progressBar"),
         progressText: root.querySelector("#progressText"),
-        scores: root.querySelector("#scores"),
+        panel: root.querySelector("#panel"),
         answerFalse: root.querySelector("#buttonFalse"),
         answerTrue: root.querySelector("#buttonTrue"),
     };
 
+    const { results } = content;
+    const maximum = questions.length / CATEGORIES.length;
     let quiz = Quiz.createQuiz(content.introSlides.length, questions);
+    let selectedPosture = null;
 
     function show(element, visible) {
         element.hidden = !visible;
@@ -34,29 +38,53 @@ export function startSlider(root, content, questions) {
         button.setAttribute("aria-pressed", String(selected));
     }
 
-    function renderScores() {
-        const values = Quiz.scores(quiz);
-        const maximum = questions.length / CATEGORIES.length;
-        el.scores.replaceChildren(
-            ...CATEGORIES.map((category) => {
-                const item = document.createElement("li");
-                item.textContent = `${content.results.categoryLabels[category]} : ${values[category]} / ${maximum}`;
-                return item;
-            }),
-        );
+    function titleFor(kind, question) {
+        switch (kind) {
+            case "intro":
+                return content.introSlides[quiz.index].title;
+            case "question":
+                return `QUESTION ${question.id}`;
+            case "grid":
+                return results.analysisGrid.title;
+            case "scores":
+                return results.scoresTitle;
+            default:
+                return results.conclusion.title;
+        }
+    }
+
+    function renderPanel(kind) {
+        if (kind === "grid") {
+            renderGrid(el.panel, results.analysisGrid);
+        } else if (kind === "scores") {
+            renderScores(el.panel, {
+                scores: Quiz.scores(quiz),
+                maximum,
+                results,
+                selected: selectedPosture,
+                onSelect: (category) => {
+                    selectedPosture = selectedPosture === category ? null : category;
+                    render();
+                },
+            });
+        } else if (kind === "conclusion") {
+            renderConclusion(el.panel, {
+                conclusion: results.conclusion,
+                restartLabel: results.restart,
+                onRestart: () => update(Quiz.restart(quiz)),
+            });
+        } else {
+            el.panel.replaceChildren();
+        }
     }
 
     function render() {
         const kind = Quiz.currentKind(quiz);
         const question = Quiz.currentQuestion(quiz);
         const intro = kind === "intro" ? content.introSlides[quiz.index] : {};
+        const isResult = Quiz.isResultScreen(quiz);
 
-        el.title.textContent =
-            kind === "intro"
-                ? intro.title
-                : kind === "question"
-                  ? `QUESTION ${question.id}`
-                  : content.results.scoresTitle;
+        el.title.textContent = titleFor(kind, question);
         el.subtitle.textContent = intro.subtitle ?? "";
         el.text.textContent = question ? question.text : "";
         el.note.textContent = intro.note ?? "";
@@ -70,10 +98,8 @@ export function startSlider(root, content, questions) {
             el.progressText.textContent = `Question ${position.current} / ${position.total}`;
         }
 
-        show(el.scores, kind === "results");
-        if (kind === "results") {
-            renderScores();
-        }
+        show(el.panel, isResult);
+        renderPanel(kind);
 
         const answered = Quiz.currentAnswer(quiz);
         show(el.answerFalse, kind === "question");
@@ -87,6 +113,8 @@ export function startSlider(root, content, questions) {
 
     function update(newQuiz) {
         quiz = newQuiz;
+        selectedPosture = null;
+        el.panel.scrollTop = 0;
         render();
     }
 

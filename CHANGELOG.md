@@ -5,6 +5,20 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ## [Non publié]
 
+## [0.3.0] - 2026-11-26
+
+### Ajouté
+
+- Après la question 60 : grille d'analyse, puis histogramme des 4 scores, puis conclusion.
+- Histogramme SVG animé (désactivé si « réduire les animations » est activé).
+- Détail de chaque posture au clic sur son bouton, avec des textes originaux.
+- Bouton « Recommencer » sur la conclusion.
+- Tests de l'enchaînement des écrans et de la géométrie de l'histogramme.
+
+### Modifié
+
+- Sur petit écran, les boutons Précédent et Suivant passent en bas de la carte.
+
 ## [0.2.0] - 2026-11-26
 
 ### Ajouté
@@ -48,6 +62,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 - `results.html` et `results.js`, qui ne fonctionnaient pas ; leurs textes sont conservés dans `src/data/content.json` pour la v0.3.0.
 
-[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.2.0...HEAD
+[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/VincentLesniak/AssertivenessProject/releases/tag/v0.1.0
