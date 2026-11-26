@@ -1,0 +1,302 @@
+[
+    {
+        "id": 1,
+        "text": "Je dis souvent oui, alors que je voudrais dire non",
+        "category": "flight"
+    },
+    {
+        "id": 2,
+        "text": "Je défends mes droits, sans empiéter sur ceux des autres",
+        "category": "assertiveness"
+    },
+    {
+        "id": 3,
+        "text": "Je préfère dissimuler ce que je pense ou ressens, si je ne connais pas bien la personne",
+        "category": "manipulation"
+    },
+    {
+        "id": 4,
+        "text": "Je suis plutôt autoritaire et décidé",
+        "category": "aggression"
+    },
+    {
+        "id": 5,
+        "text": "Il est en général plus facile et habile d’agir par personne interposée que directement",
+        "category": "manipulation"
+    },
+    {
+        "id": 6,
+        "text": "Je ne crains pas de critiquer et de dire aux gens ce que je pense",
+        "category": "aggression"
+    },
+    {
+        "id": 7,
+        "text": "Je n’ose pas refuser certaines tâches qui manifestement ne relèvent pas de mes attributions",
+        "category": "flight"
+    },
+    {
+        "id": 8,
+        "text": "Je ne crains pas de donner mon opinion, même en face d’interlocuteurs hostiles",
+        "category": "assertiveness"
+    },
+    {
+        "id": 9,
+        "text": "Quand il y a un débat, je préfère me tenir en retrait pour voir comment cela va tourner",
+        "category": "manipulation"
+    },
+    {
+        "id": 10,
+        "text": "On me reproche parfois d’avoir l’esprit de contradiction",
+        "category": "aggression"
+    },
+    {
+        "id": 11,
+        "text": "J’ai du mal à écouter les autres",
+        "category": "aggression"
+    },
+    {
+        "id": 12,
+        "text": "Je m’arrange pour être dans les secrets des dieux ; cela m’a bien rendu service",
+        "category": "manipulation"
+    },
+    {
+        "id": 13,
+        "text": "On me considère en général comme assez malin et habile dans les relations",
+        "category": "manipulation"
+    },
+    {
+        "id": 14,
+        "text": "J’entretiens avec les autres des rapports fondés sur la confiance plutôt que sur la domination ou le calcul",
+        "category": "assertiveness"
+    },
+    {
+        "id": 15,
+        "text": "Je préfère ne pas demander de l’aide à un collègue ; il risquerait de penser que je ne suis pas compétent",
+        "category": "flight"
+    },
+    {
+        "id": 16,
+        "text": "Je suis timide et je me sens bloqué dès que je dois réaliser une action inhabituelle",
+        "category": "flight"
+    },
+    {
+        "id": 17,
+        "text": "On me dit « soupe au lait » ; je m’énerve et cela fait rire les autres",
+        "category": "flight"
+    },
+    {
+        "id": 18,
+        "text": "Je suis à l’aise dans les contacts de face à face",
+        "category": "assertiveness"
+    },
+    {
+        "id": 19,
+        "text": "Je joue assez souvent la comédie : comment faire autrement pour arriver à ses fins ?",
+        "category": "manipulation"
+    },
+    {
+        "id": 20,
+        "text": "Je suis bavard et je coupe la parole aux autres sans m’en rendre compte à temps",
+        "category": "aggression"
+    },
+    {
+        "id": 21,
+        "text": "J’ai de l’ambition et je suis prêt à faire ce qu’il faut pour arriver",
+        "category": "aggression"
+    },
+    {
+        "id": 22,
+        "text": "Je sais en général qui il faut voir et quand il faut le voir : c’est important pour réussir",
+        "category": "manipulation"
+    },
+    {
+        "id": 23,
+        "text": "En cas de désaccord, je recherche les compromis réalistes sur la base des intérêts mutuels",
+        "category": "assertiveness"
+    },
+    {
+        "id": 24,
+        "text": "Je préfère « jouer cartes sur table »",
+        "category": "assertiveness"
+    },
+    {
+        "id": 25,
+        "text": "J’ai tendance à remettre à plus tard ce que je dois faire",
+        "category": "flight"
+    },
+    {
+        "id": 26,
+        "text": "Je laisse souvent un travail en train sans le terminer",
+        "category": "flight"
+    },
+    {
+        "id": 27,
+        "text": "En général, je me présente tel que je suis, sans dissimuler mes sentiments",
+        "category": "assertiveness"
+    },
+    {
+        "id": 28,
+        "text": "Il en faut beaucoup pour m’intimider",
+        "category": "aggression"
+    },
+    {
+        "id": 29,
+        "text": "Faire peur aux autres est souvent un bon moyen de prendre du pouvoir",
+        "category": "aggression"
+    },
+    {
+        "id": 30,
+        "text": "Quand je me suis fait avoir une fois, je sais prendre ma revanche à l’occasion",
+        "category": "aggression"
+    },
+    {
+        "id": 31,
+        "text": "Pour critiquer quelqu’un, il est efficace de lui reprocher de ne pas suivre ses propres principes. Il est forcément d’accord.",
+        "category": "manipulation"
+    },
+    {
+        "id": 32,
+        "text": "Je sais tirer parti du système : je suis débrouillard",
+        "category": "manipulation"
+    },
+    {
+        "id": 33,
+        "text": "Je suis capable d’être moi-même, tout en continuant d’être accepté socialement",
+        "category": "assertiveness"
+    },
+    {
+        "id": 34,
+        "text": "Quand je ne suis pas d’accord, j’ose le dire sans passion et je me fais entendre",
+        "category": "assertiveness"
+    },
+    {
+        "id": 35,
+        "text": "J’ai le souci de ne pas importuner les autres",
+        "category": "flight"
+    },
+    {
+        "id": 36,
+        "text": "J’ai du mal à prendre parti et à choisir",
+        "category": "flight"
+    },
+    {
+        "id": 37,
+        "text": "Je n’aime pas être la seule personne de mon avis dans un groupe : dans ce cas, je préfère me taire",
+        "category": "flight"
+    },
+    {
+        "id": 38,
+        "text": "Je n’ai pas peur de parler en public",
+        "category": "assertiveness"
+    },
+    {
+        "id": 39,
+        "text": "La vie n’est que rapports de forces et lutte",
+        "category": "aggression"
+    },
+    {
+        "id": 40,
+        "text": "Je n’ai pas peur de relever des défis dangereux et risqués",
+        "category": "aggression"
+    },
+    {
+        "id": 41,
+        "text": "Créer des conflits peut être plus efficace que réduire les tensions",
+        "category": "manipulation"
+    },
+    {
+        "id": 42,
+        "text": "Jouer la franchise est un bon moyen pour mettre en confiance",
+        "category": "manipulation"
+    },
+    {
+        "id": 43,
+        "text": "Je sais écouter et je ne coupe pas la parole",
+        "category": "assertiveness"
+    },
+    {
+        "id": 44,
+        "text": "Je mène jusqu’au bout ce que j’ai décidé de faire",
+        "category": "assertiveness"
+    },
+    {
+        "id": 45,
+        "text": "Je n’ai pas peur d’exprimer mes sentiments tels que je les ressens",
+        "category": "assertiveness"
+    },
+    {
+        "id": 46,
+        "text": "Je sais bien faire adhérer les gens et les amener à mes idées",
+        "category": "manipulation"
+    },
+    {
+        "id": 47,
+        "text": "Flatter tout un chacun reste encore un bon moyen d’obtenir ce que l’on veut",
+        "category": "manipulation"
+    },
+    {
+        "id": 48,
+        "text": "J’ai du mal à maîtriser mon temps de parole",
+        "category": "aggression"
+    },
+    {
+        "id": 49,
+        "text": "Je sais manier l’ironie mordante",
+        "category": "aggression"
+    },
+    {
+        "id": 50,
+        "text": "Je suis serviable et facile à vivre ; parfois même je me fais un peu exploiter",
+        "category": "flight"
+    },
+    {
+        "id": 51,
+        "text": "J’aime mieux observer que participer",
+        "category": "flight"
+    },
+    {
+        "id": 52,
+        "text": "Je préfère être dans les coulisses qu’au premier rang",
+        "category": "flight"
+    },
+    {
+        "id": 53,
+        "text": "Je ne pense pas que la manipulation soit une solution efficace",
+        "category": "assertiveness"
+    },
+    {
+        "id": 54,
+        "text": "Il ne faut pas annoncer trop vite ses intentions, c’est maladroit",
+        "category": "manipulation"
+    },
+    {
+        "id": 55,
+        "text": "Je choque souvent les gens par mes propos",
+        "category": "aggression"
+    },
+    {
+        "id": 56,
+        "text": "Je préfère être loup qu’agneau",
+        "category": "aggression"
+    },
+    {
+        "id": 57,
+        "text": "Manipuler les autres est souvent le seul moyen pratique pour obtenir ce que l’on veut",
+        "category": "manipulation"
+    },
+    {
+        "id": 58,
+        "text": "Je sais en général protester avec efficacité, sans agressivité excessive",
+        "category": "assertiveness"
+    },
+    {
+        "id": 59,
+        "text": "Je trouve que les problèmes ne peuvent être vraiment résolus sans en chercher les causes profondes",
+        "category": "flight"
+    },
+    {
+        "id": 60,
+        "text": "Je n’aime pas me faire mal voir",
+        "category": "flight"
+    }
+]
