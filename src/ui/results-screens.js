@@ -4,16 +4,22 @@
  */
 import { barGeometry, ticks, valueToY } from "../core/chart.js";
 import { CATEGORIES } from "../core/scoring.js";
+import { frenchSpacing } from "../core/typography.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
-const VIEW = { width: 320, height: 200 };
-const PLOT = { left: 30, top: 12, width: 280, height: 176 };
+const VIEW = { width: 320, height: 190 };
+const PLOT = { left: 26, top: 10, width: 288, height: 170 };
 
-function create(tag, attributes = {}, text) {
+/** Couleur d'une posture, définie dans tokens.css. */
+export const postureColor = (category) => `var(--color-${category})`;
+
+function create(tag, className, text) {
     const element = document.createElement(tag);
-    Object.assign(element, attributes);
+    if (className) {
+        element.className = className;
+    }
     if (text !== undefined) {
-        element.textContent = text;
+        element.textContent = frenchSpacing(text);
     }
     return element;
 }
@@ -30,13 +36,9 @@ function svg(tag, attributes = {}, text) {
 }
 
 export function renderGrid(panel, grid) {
-    panel.replaceChildren(
-        create("p", { className: "panel-lead" }, grid.subtitle),
-        create("ul", { className: "grid-list" }, undefined),
-    );
-    panel
-        .querySelector(".grid-list")
-        .append(...grid.items.map((item) => create("li", {}, `- ${item}`)));
+    const list = create("ul", "grid-list");
+    list.append(...grid.items.map((item) => create("li", "", item)));
+    panel.replaceChildren(create("p", "panel-lead", grid.subtitle), list);
 }
 
 function buildChart(scores, maximum, labels) {
@@ -60,26 +62,30 @@ function buildChart(scores, maximum, labels) {
                 y2: y,
                 class: value === 0 ? "chart-axis" : "chart-grid",
             }),
-            svg("text", { x: PLOT.left - 8, y: y + 4, class: "chart-tick" }, String(value)),
+            svg("text", { x: PLOT.left - 6, y: y + 3.5, class: "chart-tick" }, String(value)),
         );
     }
 
     CATEGORIES.forEach((category, index) => {
-        const bar = barGeometry(scores[category], maximum, index, CATEGORIES.length, PLOT);
+        const bar = barGeometry(scores[category], maximum, index, CATEGORIES.length, PLOT, 0.3);
+        const inside = bar.height >= 22;
         chart.append(
             svg("rect", {
                 x: bar.x,
                 y: bar.y,
                 width: bar.width,
                 height: bar.height,
+                rx: 4,
                 class: "chart-bar",
+                style: `fill: ${postureColor(category)}`,
             }),
             svg(
                 "text",
                 {
                     x: bar.x + bar.width / 2,
-                    y: bar.height >= 22 ? bar.y + 16 : bar.y - 6,
+                    y: inside ? bar.y + 15 : bar.y - 5,
                     class: "chart-value",
+                    style: `fill: ${inside ? "var(--color-on-primary)" : "var(--color-text)"}`,
                 },
                 String(scores[category]),
             ),
@@ -95,30 +101,37 @@ function buildChart(scores, maximum, labels) {
 export function renderScores(panel, { scores, maximum, results, selected, onSelect }) {
     const labels = results.categoryLabels;
 
-    const srList = create("ul", { className: "visually-hidden" });
+    const srList = create("ul", "visually-hidden");
     srList.append(
         ...CATEGORIES.map((category) =>
-            create("li", {}, `${labels[category]} : ${scores[category]} / ${maximum}`),
+            create("li", "", `${labels[category]} : ${scores[category]} / ${maximum}`),
         ),
     );
 
     let main;
     if (selected) {
         const posture = results.postures[selected];
-        main = create("article", { className: "posture-card" });
+        main = create("article", "posture-card");
+        main.style.setProperty("--posture-color", postureColor(selected));
         main.setAttribute("aria-live", "polite");
-        main.append(create("h3", {}, posture.title), create("p", {}, posture.text));
+        main.append(
+            create("h2", "", posture.title),
+            create("p", "", posture.text),
+            create("p", "posture-score", `${labels[selected]} · ${scores[selected]} / ${maximum}`),
+        );
     } else {
-        main = create("div", { className: "chart-wrapper" });
-        main.append(buildChart(scores, maximum, labels));
+        main = buildChart(scores, maximum, labels);
     }
 
-    const buttons = create("div", { className: "posture-buttons" });
+    const buttons = create("div", "posture-buttons");
     buttons.append(
         ...CATEGORIES.map((category) => {
-            const button = create("button", { type: "button" }, labels[category]);
+            const button = create("button", "posture-button");
+            button.type = "button";
+            button.style.color = postureColor(category);
+            button.append(create("span", "", labels[category]));
             const isSelected = category === selected;
-            button.classList.toggle("is-selected", isSelected);
+            button.classList.toggle("is-active", isSelected);
             button.classList.toggle("is-dimmed", selected !== null && !isSelected);
             button.setAttribute("aria-pressed", String(isSelected));
             button.addEventListener("click", () => onSelect(category));
@@ -126,16 +139,20 @@ export function renderScores(panel, { scores, maximum, results, selected, onSele
         }),
     );
 
-    const hint = create("p", { className: "panel-hint" }, selected ? "" : results.chartHint);
-    panel.replaceChildren(srList, main, buttons, hint);
+    const children = [srList, main, buttons];
+    if (!selected) {
+        children.push(create("p", "panel-hint", results.chartHint));
+    }
+    panel.replaceChildren(...children);
 }
 
 export function renderConclusion(panel, { conclusion, restartLabel, onRestart }) {
-    const restartButton = create("button", { type: "button", className: "restart" }, restartLabel);
+    const restartButton = create("button", "btn btn-primary restart", restartLabel);
+    restartButton.type = "button";
     restartButton.addEventListener("click", onRestart);
     panel.replaceChildren(
-        create("p", { className: "panel-lead" }, conclusion.subtitle),
-        ...conclusion.paragraphs.map((text) => create("p", {}, text)),
+        create("p", "panel-lead", conclusion.subtitle),
+        ...conclusion.paragraphs.map((text) => create("p", "", text)),
         restartButton,
     );
 }

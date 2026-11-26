@@ -5,6 +5,22 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ## [Non publié]
 
+### Ajouté
+
+- Charte graphique : palette « Ardoise », une couleur par posture, polices Inter et Space Grotesk incluses dans le site (sans Google Fonts).
+- Bouton « Commencer » et durée indicative sur l'accueil.
+- Icône d'onglet et titre « Test d'assertivité ».
+- Maquettes v0.4.0 dans `docs/maquettes/v0.4.0/`, captures dans `docs/screens/v0.4.0/`.
+
+### Modifié
+
+- Nouvelle mise en page en colonne : plus de textes superposés ni de défilement dans la carte, sur ordinateur comme sur mobile.
+- Boutons de 48 px de haut, réponse choisie remplie avec une coche, navigation « ← Précédent » / « Suivant → ».
+- Histogramme et cartes de détail aux couleurs des postures.
+- Accents ajoutés aux titres (RÈGLES, TES RÉSULTATS) ; « faîtes » corrigé en « faites ».
+- Espaces insécables avant « : ; ? ! » et à l'intérieur des guillemets, pour éviter un signe seul en début de ligne.
+- Texte courant justifié, avec césure française pour éviter les grands blancs.
+
 ## [0.3.0] - 2026-11-26
 
 ### Ajouté

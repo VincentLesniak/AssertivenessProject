@@ -3,25 +3,37 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Assertiveness</title>
+        <meta name="description" content="Auto-diagnostic d'assertivité en 60 affirmations." />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>Test d'assertivité</title>
     </head>
     <body>
-        <div id="content">
-            <button id="leftButton">Précédent</button>
-            <button id="rightButton">Suivant</button>
-            <h1 id="h1"></h1>
-            <div id="progress" hidden>
-                <progress id="progressBar" max="60" value="0"></progress>
-                <span id="progressText"></span>
-            </div>
-            <h2 id="h2"></h2>
-            <p id="p"></p>
-            <section id="panel" hidden></section>
-            <h3 id="h3"></h3>
-            <button id="buttonFalse" hidden>PLUTÔT FAUX</button>
-            <button id="buttonTrue" hidden>PLUTÔT VRAI</button>
-            <h4 id="h42"></h4>
-        </div>
+        <main class="app">
+            <section class="card" id="content">
+                <header class="card-head">
+                    <h1 id="title"></h1>
+                    <span id="progressCount" class="progress-count" hidden></span>
+                </header>
+                <div id="progress" class="progress" hidden>
+                    <span id="progressBar" class="progress-bar"></span>
+                </div>
+                <p id="subtitle" class="subtitle"></p>
+                <dl id="definitions" class="definitions" hidden></dl>
+                <p id="questionText" class="question-text" hidden></p>
+                <section id="panel" class="panel" hidden></section>
+                <button id="startButton" class="btn btn-primary" type="button" hidden></button>
+                <div id="answers" class="answers" hidden>
+                    <button id="buttonFalse" class="btn btn-answer" type="button"></button>
+                    <button id="buttonTrue" class="btn btn-answer" type="button"></button>
+                </div>
+                <p id="keyboardHint" class="hint" hidden></p>
+            </section>
+            <nav class="nav" aria-label="Navigation du test">
+                <button id="leftButton" class="nav-link" type="button"></button>
+                <button id="rightButton" class="nav-link" type="button"></button>
+            </nav>
+            <p id="credit" class="credit"></p>
+        </main>
         <script type="module" src="/src/main.js"></script>
     </body>
 </html>
