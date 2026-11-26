@@ -19,6 +19,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 - Histogramme et cartes de détail aux couleurs des postures.
 - Accents ajoutés aux titres (RÈGLES, TES RÉSULTATS) ; « faîtes » corrigé en « faites ».
 - Espaces insécables avant « : ; ? ! » et à l'intérieur des guillemets, pour éviter un signe seul en début de ligne.
+- Texte courant justifié, avec césure française pour éviter les grands blancs.
 
 ## [0.3.0] - 2026-11-26
 

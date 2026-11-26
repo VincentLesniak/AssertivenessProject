@@ -211,11 +211,21 @@ h1 {
     text-wrap: pretty;
 }
 
-.panel p {
-    text-wrap: pretty;
+/* Texte courant justifié, avec césure française pour éviter les grands blancs sur mobile */
+.panel p,
+.definitions,
+.posture-card p {
+    text-align: justify;
+    hyphens: auto;
 }
 
-.panel-hint {
+.panel .panel-hint,
+.posture-card .posture-score {
+    text-align: left;
+    hyphens: manual;
+}
+
+.panel .panel-hint {
     text-align: center;
     font-size: 0.85rem;
     color: var(--color-muted);
