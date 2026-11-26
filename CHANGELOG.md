@@ -5,6 +5,29 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ## [Non publié]
 
+## [0.2.0] - 2026-11-26
+
+### Ajouté
+
+- Écran « TES RESULTATS » après la question 60, avec les quatre scores sur 15.
+- Indicateur « Question 12 / 60 » et barre de progression.
+- La réponse déjà donnée est mise en évidence quand on revient sur une question.
+- Bouton « Suivant » sur une question déjà répondue.
+- Tests de la navigation et des réponses (`src/core/quiz.js`).
+
+### Modifié
+
+- Boutons « Précédent » et « Suivant » à la place de « Left » et « Right ».
+- « Plutôt faux » à gauche, « Plutôt vrai » à droite, comme sur la maquette.
+- La mention du livre apparaît dès l'écran d'accueil.
+- La page est déclarée en français (`lang="fr"`).
+
+### Corrigé
+
+- Modifier une réponse après un retour arrière ne compte plus le point deux fois.
+- La fin du test n'affiche plus un écran vide.
+- Les scores ne sont plus écrits dans la console.
+
 ## [0.1.0] - 2026-11-26
 
 ### Modifié
@@ -25,5 +48,6 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 - `results.html` et `results.js`, qui ne fonctionnaient pas ; leurs textes sont conservés dans `src/data/content.json` pour la v0.3.0.
 
-[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.1.0...HEAD
+[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/VincentLesniak/AssertivenessProject/releases/tag/v0.1.0
