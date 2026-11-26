@@ -1,22 +1,33 @@
 {
     "credit": "Test repris du livre de Dominique CHALVIN, « Affirmation de Soi »",
     "answers": {
-        "false": "PLUTÔT FAUX",
-        "true": "PLUTÔT VRAI"
+        "false": "Plutôt faux",
+        "true": "Plutôt vrai"
     },
     "introSlides": [
         {
-            "title": "TESTEZ VOTRE ASSERTIVITÉ"
+            "title": "TESTEZ VOTRE ASSERTIVITÉ",
+            "subtitle": "60 affirmations · environ 10 minutes",
+            "start": "Commencer"
         },
         {
-            "title": "REGLES",
-            "subtitle": "Répondez le plus spontanément possible en répondant par plutôt vrai ou plutôt faux",
-            "note": "« plutôt vrai » : vous pensez ou agissez de cette façon la plupart du temps « plutôt faux » : vous faîtes ou pensez rarement de cette façon"
+            "title": "RÈGLES",
+            "subtitle": "Répondez le plus spontanément possible en répondant par plutôt vrai ou plutôt faux.",
+            "definitions": [
+                {
+                    "term": "Plutôt vrai",
+                    "text": "vous pensez ou agissez de cette façon la plupart du temps."
+                },
+                {
+                    "term": "Plutôt faux",
+                    "text": "vous faites ou pensez rarement de cette façon."
+                }
+            ]
         }
     ],
     "results": {
         "analysisGrid": {
-            "title": "GRILLE D'ANALYSE & RESULTATS",
+            "title": "GRILLE D'ANALYSE",
             "subtitle": "Chaque affirmation du test correspond à une forme d'attitude",
             "items": [
                 "LA FUITE",
@@ -25,7 +36,7 @@
                 "LE COMPORTEMENT ASSERTIF"
             ]
         },
-        "scoresTitle": "TES RESULTATS",
+        "scoresTitle": "TES RÉSULTATS",
         "categoryLabels": {
             "flight": "PASSIF",
             "aggression": "AGRESSIF",
@@ -60,5 +71,10 @@
         },
         "chartHint": "Touchez une posture pour lire son explication.",
         "restart": "Recommencer"
-    }
+    },
+    "navigation": {
+        "previous": "← Précédent",
+        "next": "Suivant →"
+    },
+    "keyboardHint": "Clavier : V ou F"
 }

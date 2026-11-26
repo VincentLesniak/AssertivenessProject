@@ -4,23 +4,29 @@
  */
 import { CATEGORIES } from "../core/scoring.js";
 import * as Quiz from "../core/quiz.js";
+import { frenchSpacing } from "../core/typography.js";
 import { renderConclusion, renderGrid, renderScores } from "./results-screens.js";
 
 export function startSlider(root, content, questions) {
+    const $ = (id) => root.querySelector(`#${id}`);
     const el = {
-        previous: root.querySelector("#leftButton"),
-        next: root.querySelector("#rightButton"),
-        title: root.querySelector("#h1"),
-        subtitle: root.querySelector("#h2"),
-        text: root.querySelector("#p"),
-        note: root.querySelector("#h3"),
-        credit: root.querySelector("#h42"),
-        progress: root.querySelector("#progress"),
-        progressBar: root.querySelector("#progressBar"),
-        progressText: root.querySelector("#progressText"),
-        panel: root.querySelector("#panel"),
-        answerFalse: root.querySelector("#buttonFalse"),
-        answerTrue: root.querySelector("#buttonTrue"),
+        head: root.querySelector(".card-head"),
+        title: $("title"),
+        progressCount: $("progressCount"),
+        progress: $("progress"),
+        progressBar: $("progressBar"),
+        subtitle: $("subtitle"),
+        definitions: $("definitions"),
+        questionText: $("questionText"),
+        panel: $("panel"),
+        start: $("startButton"),
+        answers: $("answers"),
+        answerFalse: $("buttonFalse"),
+        answerTrue: $("buttonTrue"),
+        keyboardHint: $("keyboardHint"),
+        previous: $("leftButton"),
+        next: $("rightButton"),
+        credit: $("credit"),
     };
 
     const { results } = content;
@@ -28,15 +34,20 @@ export function startSlider(root, content, questions) {
     let quiz = Quiz.createQuiz(content.introSlides.length, questions);
     let selectedPosture = null;
 
-    function show(element, visible) {
+    const setText = (element, text) => {
+        element.textContent = frenchSpacing(text);
+    };
+    const show = (element, visible) => {
         element.hidden = !visible;
-    }
+    };
 
-    function renderAnswerButton(button, label, selected) {
-        button.textContent = label;
-        button.classList.toggle("is-selected", selected);
-        button.setAttribute("aria-pressed", String(selected));
-    }
+    // Textes fixes
+    setText(el.previous, content.navigation.previous);
+    setText(el.next, content.navigation.next);
+    setText(el.answerFalse, content.answers.false);
+    setText(el.answerTrue, content.answers.true);
+    setText(el.keyboardHint, content.keyboardHint);
+    setText(el.credit, content.credit);
 
     function titleFor(kind, question) {
         switch (kind) {
@@ -51,6 +62,24 @@ export function startSlider(root, content, questions) {
             default:
                 return results.conclusion.title;
         }
+    }
+
+    function renderDefinitions(definitions) {
+        show(el.definitions, Boolean(definitions));
+        if (!definitions) {
+            return;
+        }
+        el.definitions.replaceChildren(
+            ...definitions.map(({ term, text }) => {
+                const row = document.createElement("div");
+                const dt = document.createElement("dt");
+                const dd = document.createElement("dd");
+                setText(dt, term);
+                setText(dd, ` : ${text}`);
+                row.append(dt, dd);
+                return row;
+            }),
+        );
     }
 
     function renderPanel(kind) {
@@ -82,42 +111,55 @@ export function startSlider(root, content, questions) {
         const kind = Quiz.currentKind(quiz);
         const question = Quiz.currentQuestion(quiz);
         const intro = kind === "intro" ? content.introSlides[quiz.index] : {};
-        const isResult = Quiz.isResultScreen(quiz);
+        const isWelcome = quiz.index === 0;
 
-        el.title.textContent = titleFor(kind, question);
-        el.subtitle.textContent = intro.subtitle ?? "";
-        el.text.textContent = question ? question.text : "";
-        el.note.textContent = intro.note ?? "";
-        el.credit.textContent = content.credit;
+        setText(el.title, titleFor(kind, question));
+        el.head.classList.toggle("is-question", kind === "question");
+        setText(el.subtitle, intro.subtitle);
+        show(el.subtitle, Boolean(intro.subtitle));
+        renderDefinitions(intro.definitions);
+
+        show(el.questionText, Boolean(question));
+        setText(el.questionText, question?.text);
 
         const position = Quiz.progress(quiz);
         show(el.progress, position !== null);
+        show(el.progressCount, position !== null);
         if (position) {
-            el.progressBar.max = position.total;
-            el.progressBar.value = position.current;
-            el.progressText.textContent = `Question ${position.current} / ${position.total}`;
+            el.progressCount.textContent = `${position.current} / ${position.total}`;
+            el.progressBar.style.width = `${(position.current / position.total) * 100}%`;
         }
 
-        show(el.panel, isResult);
+        show(el.panel, Quiz.isResultScreen(quiz));
         renderPanel(kind);
 
+        show(el.start, isWelcome);
+        setText(el.start, intro.start);
+
         const answered = Quiz.currentAnswer(quiz);
-        show(el.answerFalse, kind === "question");
-        show(el.answerTrue, kind === "question");
-        renderAnswerButton(el.answerFalse, content.answers.false, answered === false);
-        renderAnswerButton(el.answerTrue, content.answers.true, answered === true);
+        show(el.answers, kind === "question");
+        // Raccourcis clavier : affichés avec la seconde partie de la v0.4.0
+        show(el.keyboardHint, false);
+        for (const [button, value] of [
+            [el.answerFalse, false],
+            [el.answerTrue, true],
+        ]) {
+            button.classList.toggle("is-selected", answered === value);
+            button.setAttribute("aria-pressed", String(answered === value));
+        }
 
         show(el.previous, Quiz.canGoPrevious(quiz));
-        show(el.next, Quiz.canGoNext(quiz));
+        show(el.next, Quiz.canGoNext(quiz) && !isWelcome);
     }
 
     function update(newQuiz) {
         quiz = newQuiz;
         selectedPosture = null;
-        el.panel.scrollTop = 0;
         render();
+        window.scrollTo({ top: 0 });
     }
 
+    el.start.addEventListener("click", () => update(Quiz.goNext(quiz)));
     el.previous.addEventListener("click", () => update(Quiz.goPrevious(quiz)));
     el.next.addEventListener("click", () => update(Quiz.goNext(quiz)));
     el.answerFalse.addEventListener("click", () => update(Quiz.answer(quiz, false)));

@@ -22,7 +22,7 @@ Ce projet a pour vocation d'aider les utilisateurs à identifier leur style de c
 - **Questionnaire complet :** 60 mises en situation basées sur des comportements sociaux et professionnels réels.
 - **Interface intuitive :** Navigation fluide question par question.
 - **Format binaire rapide :** Choix simples entre « Plutôt Vrai » et « Plutôt Faux » pour garantir la spontanéité des réponses (règle primordiale du test).
-- **Analyse des résultats :** histogramme des quatre postures avec une animation (prévu en v0.3.0).
+- **Analyse des résultats :** histogramme animé des quatre postures, explication de chaque posture et conclusion.
 
 ## Technologies utilisées
 
@@ -65,24 +65,34 @@ npm run build      # produit le site final dans dist/
 - Messages de commit au format [Conventional Commits](https://www.conventionalcommits.org/fr/) : `feat: …`, `fix: …`.
 - Chaque version est listée dans [CHANGELOG.md](CHANGELOG.md).
 
-## Captures d'écran (v0.3.0)
+## Captures d'écran (v0.4.0)
+
+Les captures des versions précédentes sont dans [`docs/screens/`](docs/screens/).
 
 | Écran                                   | Ordinateur                                                                                                                                      | Mobile                                                                                                                                     |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Accueil                                 | <img src="docs/screens/v0.3.0/desktop-01-accueil.png" width="340" alt="Accueil, ordinateur" />                                                  | <img src="docs/screens/v0.3.0/mobile-01-accueil.png" width="200" alt="Accueil, mobile" />                                                  |
-| Règles                                  | <img src="docs/screens/v0.3.0/desktop-02-regles.png" width="340" alt="Règles, ordinateur" />                                                    | <img src="docs/screens/v0.3.0/mobile-02-regles.png" width="200" alt="Règles, mobile" />                                                    |
-| Question 1                              | <img src="docs/screens/v0.3.0/desktop-03-question-1.png" width="340" alt="Question 1, ordinateur" />                                            | <img src="docs/screens/v0.3.0/mobile-03-question-1.png" width="200" alt="Question 1, mobile" />                                            |
-| Question déjà répondue (retour arrière) | <img src="docs/screens/v0.3.0/desktop-04-question-1-deja-repondue.png" width="340" alt="Question déjà répondue (retour arrière), ordinateur" /> | <img src="docs/screens/v0.3.0/mobile-04-question-1-deja-repondue.png" width="200" alt="Question déjà répondue (retour arrière), mobile" /> |
-| Question 60                             | <img src="docs/screens/v0.3.0/desktop-05-question-60.png" width="340" alt="Question 60, ordinateur" />                                          | <img src="docs/screens/v0.3.0/mobile-05-question-60.png" width="200" alt="Question 60, mobile" />                                          |
-| Grille d'analyse                        | <img src="docs/screens/v0.3.0/desktop-06-grille-analyse.png" width="340" alt="Grille d'analyse, ordinateur" />                                  | <img src="docs/screens/v0.3.0/mobile-06-grille-analyse.png" width="200" alt="Grille d'analyse, mobile" />                                  |
-| Résultats : histogramme                 | <img src="docs/screens/v0.3.0/desktop-07-resultats-histogramme.png" width="340" alt="Résultats : histogramme, ordinateur" />                    | <img src="docs/screens/v0.3.0/mobile-07-resultats-histogramme.png" width="200" alt="Résultats : histogramme, mobile" />                    |
-| Détail : passif                         | <img src="docs/screens/v0.3.0/desktop-08-detail-passif.png" width="340" alt="Détail : passif, ordinateur" />                                    | <img src="docs/screens/v0.3.0/mobile-08-detail-passif.png" width="200" alt="Détail : passif, mobile" />                                    |
-| Détail : agressif                       | <img src="docs/screens/v0.3.0/desktop-09-detail-agressif.png" width="340" alt="Détail : agressif, ordinateur" />                                | <img src="docs/screens/v0.3.0/mobile-09-detail-agressif.png" width="200" alt="Détail : agressif, mobile" />                                |
-| Détail : manipulateur                   | <img src="docs/screens/v0.3.0/desktop-10-detail-manipulateur.png" width="340" alt="Détail : manipulateur, ordinateur" />                        | <img src="docs/screens/v0.3.0/mobile-10-detail-manipulateur.png" width="200" alt="Détail : manipulateur, mobile" />                        |
-| Détail : assertif                       | <img src="docs/screens/v0.3.0/desktop-11-detail-assertif.png" width="340" alt="Détail : assertif, ordinateur" />                                | <img src="docs/screens/v0.3.0/mobile-11-detail-assertif.png" width="200" alt="Détail : assertif, mobile" />                                |
-| Conclusion                              | <img src="docs/screens/v0.3.0/desktop-12-conclusion.png" width="340" alt="Conclusion, ordinateur" />                                            | <img src="docs/screens/v0.3.0/mobile-12-conclusion.png" width="200" alt="Conclusion, mobile" />                                            |
+| Accueil                                 | <img src="docs/screens/v0.4.0/desktop-01-accueil.png" width="340" alt="Accueil, ordinateur" />                                                  | <img src="docs/screens/v0.4.0/mobile-01-accueil.png" width="200" alt="Accueil, mobile" />                                                  |
+| Règles                                  | <img src="docs/screens/v0.4.0/desktop-02-regles.png" width="340" alt="Règles, ordinateur" />                                                    | <img src="docs/screens/v0.4.0/mobile-02-regles.png" width="200" alt="Règles, mobile" />                                                    |
+| Question 1                              | <img src="docs/screens/v0.4.0/desktop-03-question-1.png" width="340" alt="Question 1, ordinateur" />                                            | <img src="docs/screens/v0.4.0/mobile-03-question-1.png" width="200" alt="Question 1, mobile" />                                            |
+| Question déjà répondue (retour arrière) | <img src="docs/screens/v0.4.0/desktop-04-question-1-deja-repondue.png" width="340" alt="Question déjà répondue (retour arrière), ordinateur" /> | <img src="docs/screens/v0.4.0/mobile-04-question-1-deja-repondue.png" width="200" alt="Question déjà répondue (retour arrière), mobile" /> |
+| Question 60                             | <img src="docs/screens/v0.4.0/desktop-05-question-60.png" width="340" alt="Question 60, ordinateur" />                                          | <img src="docs/screens/v0.4.0/mobile-05-question-60.png" width="200" alt="Question 60, mobile" />                                          |
+| Grille d'analyse                        | <img src="docs/screens/v0.4.0/desktop-06-grille-analyse.png" width="340" alt="Grille d'analyse, ordinateur" />                                  | <img src="docs/screens/v0.4.0/mobile-06-grille-analyse.png" width="200" alt="Grille d'analyse, mobile" />                                  |
+| Résultats : histogramme                 | <img src="docs/screens/v0.4.0/desktop-07-resultats-histogramme.png" width="340" alt="Résultats : histogramme, ordinateur" />                    | <img src="docs/screens/v0.4.0/mobile-07-resultats-histogramme.png" width="200" alt="Résultats : histogramme, mobile" />                    |
+| Détail : passif                         | <img src="docs/screens/v0.4.0/desktop-08-detail-passif.png" width="340" alt="Détail : passif, ordinateur" />                                    | <img src="docs/screens/v0.4.0/mobile-08-detail-passif.png" width="200" alt="Détail : passif, mobile" />                                    |
+| Détail : agressif                       | <img src="docs/screens/v0.4.0/desktop-09-detail-agressif.png" width="340" alt="Détail : agressif, ordinateur" />                                | <img src="docs/screens/v0.4.0/mobile-09-detail-agressif.png" width="200" alt="Détail : agressif, mobile" />                                |
+| Détail : manipulateur                   | <img src="docs/screens/v0.4.0/desktop-10-detail-manipulateur.png" width="340" alt="Détail : manipulateur, ordinateur" />                        | <img src="docs/screens/v0.4.0/mobile-10-detail-manipulateur.png" width="200" alt="Détail : manipulateur, mobile" />                        |
+| Détail : assertif                       | <img src="docs/screens/v0.4.0/desktop-11-detail-assertif.png" width="340" alt="Détail : assertif, ordinateur" />                                | <img src="docs/screens/v0.4.0/mobile-11-detail-assertif.png" width="200" alt="Détail : assertif, mobile" />                                |
+| Conclusion                              | <img src="docs/screens/v0.4.0/desktop-12-conclusion.png" width="340" alt="Conclusion, ordinateur" />                                            | <img src="docs/screens/v0.4.0/mobile-12-conclusion.png" width="200" alt="Conclusion, mobile" />                                            |
 
 ## Maquettes
+
+### Charte v0.4.0 : palette « Ardoise », typo Inter + Space Grotesk
+
+<img src="docs/maquettes/v0.4.0/ecrans.png" alt="Maquette des écrans v0.4.0" />
+<img src="docs/maquettes/v0.4.0/couleurs.png" alt="Pistes de couleurs, la A Ardoise est retenue" />
+<img src="docs/maquettes/v0.4.0/typo.png" alt="Pistes de typographie, la 1 Inter + Space Grotesk est retenue" />
+
+### Maquettes d'origine (Excalidraw)
 
 <img width="2369" height="1740" alt="Parcours de l'application" src="docs/maquettes/assertivenessProject.png" />
 <img width="2951" height="1749" alt="Découpage des écrans" src="docs/maquettes/fonctionnality.png" />

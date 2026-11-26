@@ -1,0 +1,29 @@
+/* Palette A « Ardoise » et typographie Inter + Space Grotesk (v0.4.0) */
+:root {
+    --color-bg: #eef1f5;
+    --color-card: #ffffff;
+    --color-text: #1e2633;
+    --color-muted: #5b6779;
+    --color-line: #dde3ea;
+    --color-primary: #2f5d8a;
+    --color-primary-hover: #264d73;
+    --color-on-primary: #ffffff;
+    --color-focus: #f2a541;
+
+    --color-flight: #7a8ca5;
+    --color-aggression: #c8553d;
+    --color-manipulation: #8e6bb0;
+    --color-assertiveness: #2e8b6e;
+
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+
+    --radius-card: 16px;
+    --radius-button: 12px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+}
