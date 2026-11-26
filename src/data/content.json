@@ -1,0 +1,44 @@
+{
+    "credit": "Test repris du livre de Dominique CHALVIN, « Affirmation de Soi »",
+    "answers": {
+        "false": "PLUTÔT FAUX",
+        "true": "PLUTÔT VRAI"
+    },
+    "introSlides": [
+        {
+            "title": "TESTEZ VOTRE ASSERTIVITÉ"
+        },
+        {
+            "title": "REGLES",
+            "subtitle": "Répondez le plus spontanément possible en répondant par plutôt vrai ou plutôt faux",
+            "note": "« plutôt vrai » : vous pensez ou agissez de cette façon la plupart du temps « plutôt faux » : vous faîtes ou pensez rarement de cette façon"
+        }
+    ],
+    "results": {
+        "analysisGrid": {
+            "title": "GRILLE D'ANALYSE & RESULTATS",
+            "subtitle": "Chaque affirmation du test correspond à une forme d'attitude",
+            "items": [
+                "LA FUITE",
+                "L'ATTAQUE PROGRESSIVE",
+                "LA MANIPULATION",
+                "LE COMPORTEMENT ASSERTIF"
+            ]
+        },
+        "scoresTitle": "TES RESULTATS",
+        "categoryLabels": {
+            "flight": "PASSIF",
+            "aggression": "AGRESSIF",
+            "manipulation": "MANIPULATEUR",
+            "assertiveness": "ASSERTIF"
+        },
+        "conclusion": {
+            "title": "CONCLUSION",
+            "subtitle": "Ces trois postures non assertives font référence directement à notre schéma cognitif et à nos « pensées automatiques ».",
+            "paragraphs": [
+                "Posez-vous la question suivante : « est-ce que les situations où j’adopte l’une de ces postures non assertives ont des caractéristiques communes (contexte, enjeux, interlocuteurs, etc...) ? ». Listez ensuite ces caractéristiques et faites le lien avec votre Histoire : tirer votre fil d’Ariane;",
+                "il vous appartient de modifier ou pas ces attitudes, cherchez votre gain et ne cherchez pas à aller trop vite. On ne change pas pour les autres mais pour soi..."
+            ]
+        }
+    }
+}

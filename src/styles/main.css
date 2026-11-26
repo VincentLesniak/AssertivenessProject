@@ -21,7 +21,12 @@ body {
     border-radius: 15px;
 }
 
-#h1, #h2, #p, #h3, #h41, #h42 {
+#h1,
+#h2,
+#p,
+#h3,
+#h41,
+#h42 {
     width: 80%;
     display: flex;
     justify-content: center;
@@ -50,7 +55,7 @@ body {
 
 #p {
     position: absolute;
-    width: 42%
+    width: 42%;
 }
 
 #buttonTrue {
