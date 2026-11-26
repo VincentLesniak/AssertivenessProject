@@ -8,12 +8,12 @@
     --color-primary: #2f5d8a;
     --color-primary-hover: #264d73;
     --color-on-primary: #ffffff;
-    --color-focus: #f2a541;
+    --color-focus: #c9780e;
 
-    --color-flight: #7a8ca5;
-    --color-aggression: #c8553d;
-    --color-manipulation: #8e6bb0;
-    --color-assertiveness: #2e8b6e;
+    --color-flight: #627691;
+    --color-aggression: #c35037;
+    --color-manipulation: #8964ac;
+    --color-assertiveness: #2b8368;
 
     --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
     --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;

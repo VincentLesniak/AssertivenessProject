@@ -5,12 +5,16 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ## [Non publié]
 
+## [0.4.0] - 2026-11-27
+
 ### Ajouté
 
 - Charte graphique : palette « Ardoise », une couleur par posture, polices Inter et Space Grotesk incluses dans le site (sans Google Fonts).
 - Bouton « Commencer » et durée indicative sur l'accueil.
 - Icône d'onglet et titre « Test d'assertivité ».
 - Maquettes v0.4.0 dans `docs/maquettes/v0.4.0/`, captures dans `docs/screens/v0.4.0/`.
+- Raccourcis clavier : V ou F pour répondre, ← et → pour naviguer ; aide « Clavier : V ou F » sous les réponses (masquée sur écran tactile).
+- Reprise d'un test interrompu : les réponses sont sauvegardées dans le navigateur, l'accueil propose « Recommencer » ou « Reprendre (question N) ».
 
 ### Modifié
 
@@ -20,6 +24,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 - Accents ajoutés aux titres (RÈGLES, TES RÉSULTATS) ; « faîtes » corrigé en « faites ».
 - Espaces insécables avant « : ; ? ! » et à l'intérieur des guillemets, pour éviter un signe seul en début de ligne.
 - Texte courant justifié, avec césure française pour éviter les grands blancs.
+- Contraste AA : couleurs des postures légèrement foncées, boutons de posture non choisis lisibles (contour gris au lieu d'être pâlis), contour de focus orange plus soutenu.
 
 ## [0.3.0] - 2026-11-26
 
@@ -78,7 +83,8 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 - `results.html` et `results.js`, qui ne fonctionnaient pas ; leurs textes sont conservés dans `src/data/content.json` pour la v0.3.0.
 
-[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.3.0...HEAD
+[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/VincentLesniak/AssertivenessProject/releases/tag/v0.1.0

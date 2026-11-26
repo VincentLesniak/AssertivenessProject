@@ -319,8 +319,9 @@ h1 {
     color: var(--color-on-primary);
 }
 
+/* Postures non choisies : texte toujours lisible, seul le contour s'efface */
 .posture-button.is-dimmed {
-    opacity: 0.4;
+    border-color: var(--color-line);
 }
 
 .posture-card {
@@ -369,5 +370,17 @@ h1 {
 
     .posture-buttons {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Le titre reçoit le focus à chaque changement d'écran, sans contour */
+h1:focus {
+    outline: none;
+}
+
+/* Pas d'aide clavier sur les écrans tactiles */
+@media (hover: none) and (pointer: coarse) {
+    .hint {
+        display: none;
     }
 }

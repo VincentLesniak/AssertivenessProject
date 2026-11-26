@@ -8,7 +8,10 @@
         {
             "title": "TESTEZ VOTRE ASSERTIVITÉ",
             "subtitle": "60 affirmations · environ 10 minutes",
-            "start": "Commencer"
+            "start": "Commencer",
+            "restart": "Recommencer",
+            "resume": "Reprendre (question {n})",
+            "resumeResults": "Revoir mes résultats"
         },
         {
             "title": "RÈGLES",
