@@ -371,3 +371,15 @@ h1 {
         grid-template-columns: 1fr 1fr;
     }
 }
+
+/* Le titre reçoit le focus à chaque changement d'écran, sans contour */
+h1:focus {
+    outline: none;
+}
+
+/* Pas d'aide clavier sur les écrans tactiles */
+@media (hover: none) and (pointer: coarse) {
+    .hint {
+        display: none;
+    }
+}

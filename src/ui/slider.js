@@ -4,8 +4,10 @@
  */
 import { CATEGORIES } from "../core/scoring.js";
 import * as Quiz from "../core/quiz.js";
+import * as Save from "../core/save.js";
 import { frenchSpacing } from "../core/typography.js";
 import { renderConclusion, renderGrid, renderScores } from "./results-screens.js";
+import { clearSave, readSave, writeSave } from "./storage.js";
 
 export function startSlider(root, content, questions) {
     const $ = (id) => root.querySelector(`#${id}`);
@@ -20,6 +22,7 @@ export function startSlider(root, content, questions) {
         questionText: $("questionText"),
         panel: $("panel"),
         start: $("startButton"),
+        resume: $("resumeButton"),
         answers: $("answers"),
         answerFalse: $("buttonFalse"),
         answerTrue: $("buttonTrue"),
@@ -31,7 +34,12 @@ export function startSlider(root, content, questions) {
 
     const { results } = content;
     const maximum = questions.length / CATEGORIES.length;
-    let quiz = Quiz.createQuiz(content.introSlides.length, questions);
+    const introCount = content.introSlides.length;
+    // Un test interrompu est repris là où il s'était arrêté, sur demande depuis l'accueil
+    const saved = Save.fromSave(readSave(), introCount, questions);
+    let quiz = saved ? { ...saved, index: 0 } : Quiz.createQuiz(introCount, questions);
+    // Dernière diapositive vue hors de l'accueil : c'est là que « Reprendre » ramène
+    let resumeIndex = saved ? saved.index : 0;
     let selectedPosture = null;
 
     const setText = (element, text) => {
@@ -133,13 +141,18 @@ export function startSlider(root, content, questions) {
         show(el.panel, Quiz.isResultScreen(quiz));
         renderPanel(kind);
 
+        // Accueil : « Commencer », ou « Recommencer » et « Reprendre » si un test est en cours
+        const resumable = isWelcome && Save.hasProgress(quiz);
         show(el.start, isWelcome);
-        setText(el.start, intro.start);
+        setText(el.start, resumable ? intro.restart : intro.start);
+        show(el.resume, resumable);
+        if (resumable) {
+            setText(el.resume, resumeLabel(intro));
+        }
 
         const answered = Quiz.currentAnswer(quiz);
         show(el.answers, kind === "question");
-        // Raccourcis clavier : affichés avec la seconde partie de la v0.4.0
-        show(el.keyboardHint, false);
+        show(el.keyboardHint, kind === "question");
         for (const [button, value] of [
             [el.answerFalse, false],
             [el.answerTrue, true],
@@ -152,18 +165,75 @@ export function startSlider(root, content, questions) {
         show(el.next, Quiz.canGoNext(quiz) && !isWelcome);
     }
 
+    function resumeLabel(intro) {
+        const position = Quiz.progress(resumeTarget());
+        return position ? intro.resume.replace("{n}", position.current) : intro.resumeResults;
+    }
+
+    function resumeTarget() {
+        return Save.resumePoint({ ...quiz, index: resumeIndex });
+    }
+
     function update(newQuiz) {
         quiz = newQuiz;
         selectedPosture = null;
+        if (quiz.index !== 0) {
+            resumeIndex = quiz.index;
+        }
+        if (Save.hasProgress(quiz)) {
+            writeSave(Save.toSave({ ...quiz, index: resumeIndex }));
+        } else {
+            clearSave();
+        }
         render();
         window.scrollTo({ top: 0 });
+        // Si le bouton utilisé a disparu, le focus passe au titre du nouvel écran
+        const focused = document.activeElement;
+        if (!focused || focused === document.body || focused.closest("[hidden]")) {
+            el.title.focus({ preventScroll: true });
+        }
     }
 
-    el.start.addEventListener("click", () => update(Quiz.goNext(quiz)));
-    el.previous.addEventListener("click", () => update(Quiz.goPrevious(quiz)));
-    el.next.addEventListener("click", () => update(Quiz.goNext(quiz)));
-    el.answerFalse.addEventListener("click", () => update(Quiz.answer(quiz, false)));
-    el.answerTrue.addEventListener("click", () => update(Quiz.answer(quiz, true)));
+    function goNext() {
+        if (Quiz.canGoNext(quiz) && quiz.index !== 0) {
+            update(Quiz.goNext(quiz));
+        }
+    }
+
+    function goPrevious() {
+        if (Quiz.canGoPrevious(quiz)) {
+            update(Quiz.goPrevious(quiz));
+        }
+    }
+
+    function answer(isTrue) {
+        if (Quiz.currentKind(quiz) === "question") {
+            update(Quiz.answer(quiz, isTrue));
+        }
+    }
+
+    // Raccourcis : V ou F pour répondre, flèches gauche et droite pour naviguer
+    const shortcuts = {
+        v: () => answer(true),
+        f: () => answer(false),
+        ArrowRight: goNext,
+        ArrowLeft: goPrevious,
+    };
+    document.addEventListener("keydown", (event) => {
+        const action = shortcuts[event.key.length === 1 ? event.key.toLowerCase() : event.key];
+        if (!action || event.ctrlKey || event.metaKey || event.altKey) {
+            return;
+        }
+        event.preventDefault();
+        action();
+    });
+
+    el.start.addEventListener("click", () => update(Quiz.goNext(Quiz.restart(quiz))));
+    el.resume.addEventListener("click", () => update(resumeTarget()));
+    el.previous.addEventListener("click", goPrevious);
+    el.next.addEventListener("click", goNext);
+    el.answerFalse.addEventListener("click", () => answer(false));
+    el.answerTrue.addEventListener("click", () => answer(true));
 
     render();
 }
