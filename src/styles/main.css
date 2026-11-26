@@ -319,8 +319,9 @@ h1 {
     color: var(--color-on-primary);
 }
 
+/* Postures non choisies : texte toujours lisible, seul le contour s'efface */
 .posture-button.is-dimmed {
-    opacity: 0.4;
+    border-color: var(--color-line);
 }
 
 .posture-card {

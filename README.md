@@ -83,6 +83,8 @@ Les captures des versions précédentes sont dans [`docs/screens/`](docs/screens
 | Détail : manipulateur                   | <img src="docs/screens/v0.4.0/desktop-10-detail-manipulateur.png" width="340" alt="Détail : manipulateur, ordinateur" />                        | <img src="docs/screens/v0.4.0/mobile-10-detail-manipulateur.png" width="200" alt="Détail : manipulateur, mobile" />                        |
 | Détail : assertif                       | <img src="docs/screens/v0.4.0/desktop-11-detail-assertif.png" width="340" alt="Détail : assertif, ordinateur" />                                | <img src="docs/screens/v0.4.0/mobile-11-detail-assertif.png" width="200" alt="Détail : assertif, mobile" />                                |
 | Conclusion                              | <img src="docs/screens/v0.4.0/desktop-12-conclusion.png" width="340" alt="Conclusion, ordinateur" />                                            | <img src="docs/screens/v0.4.0/mobile-12-conclusion.png" width="200" alt="Conclusion, mobile" />                                            |
+| Reprise d'un test en cours              | <img src="docs/screens/v0.4.0/desktop-13-reprise.png" width="340" alt="Reprise d'un test en cours, ordinateur" />                               | <img src="docs/screens/v0.4.0/mobile-13-reprise.png" width="200" alt="Reprise d'un test en cours, mobile" />                               |
+| Navigation au clavier (focus visible)   | <img src="docs/screens/v0.4.0/desktop-14-clavier-focus.png" width="340" alt="Navigation au clavier, ordinateur" />                              | Sans objet sur mobile                                                                                                                      |
 
 ## Maquettes
 
