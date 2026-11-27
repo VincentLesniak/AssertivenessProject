@@ -5,6 +5,13 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ## [Non publié]
 
+## [0.5.3] - 2026-11-27
+
+### Corrigé
+
+- Plus de surlignage bleu au toucher d'un bouton sur mobile.
+- Sur écran tactile, le dernier bouton touché ne reste plus teinté comme s'il était survolé.
+
 ## [0.5.2] - 2026-11-27
 
 ### Corrigé
@@ -115,7 +122,8 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 - `results.html` et `results.js`, qui ne fonctionnaient pas ; leurs textes sont conservés dans `src/data/content.json` pour la v0.3.0.
 
-[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.2...HEAD
+[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.3...HEAD
+[0.5.3]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.1...v0.5.1
 [0.5.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.1...v0.5.1
