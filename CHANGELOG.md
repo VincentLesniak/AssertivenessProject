@@ -9,7 +9,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ### Modifié
 
-- « Enregistrer en PDF » télécharge directement le fichier `Test-d-assertivité_mes-résultats_AAAA-MM-JJ.pdf`, sans passer par la fenêtre d'impression. Le PDF est généré avec jsPDF, chargé seulement au clic.
+- « Enregistrer en PDF » télécharge directement le fichier `Test-d-assertivite_mes-resultats_AAAA-MM-JJ.pdf`, sans passer par la fenêtre d'impression. Le PDF est généré avec jsPDF, chargé seulement au clic.
 
 ### Supprimé
 
