@@ -13,7 +13,7 @@ const PLOT = { left: 26, top: 10, width: 288, height: 170 };
 /** Couleur d'une posture, définie dans tokens.css. */
 export const postureColor = (category) => `var(--color-${category})`;
 
-export function create(tag, className, text) {
+function create(tag, className, text) {
     const element = document.createElement(tag);
     if (className) {
         element.className = className;
@@ -41,7 +41,7 @@ export function renderGrid(panel, grid) {
     panel.replaceChildren(create("p", "panel-lead", grid.subtitle), list);
 }
 
-export function buildChart(scores, maximum, labels) {
+function buildChart(scores, maximum, labels) {
     const summary = CATEGORIES.map(
         (category) => `${labels[category]} ${scores[category]} sur ${maximum}`,
     ).join(", ");
@@ -94,7 +94,7 @@ export function buildChart(scores, maximum, labels) {
  * Histogramme + boutons des postures. `selected` = posture dont on lit le détail, ou null.
  * `onSelect(category)` est appelé au clic sur un bouton.
  */
-export function renderScores(panel, { scores, maximum, results, selected, onSelect, onPrint }) {
+export function renderScores(panel, { scores, maximum, results, selected, onSelect, onDownload }) {
     const labels = results.categoryLabels;
 
     const srList = create("ul", "visually-hidden");
@@ -139,27 +139,27 @@ export function renderScores(panel, { scores, maximum, results, selected, onSele
     if (!selected) {
         children.push(create("p", "panel-hint", results.chartHint));
     }
-    children.push(printButton(results.print.button, onPrint));
+    children.push(downloadButton(results.print.button, onDownload));
     panel.replaceChildren(...children);
 }
 
-function printButton(label, onPrint) {
-    const button = create("button", "btn print-button", label);
+function downloadButton(label, onDownload) {
+    const button = create("button", "btn download-button", label);
     button.type = "button";
-    button.addEventListener("click", onPrint);
+    button.addEventListener("click", onDownload);
     return button;
 }
 
 export function renderConclusion(
     panel,
-    { conclusion, restartLabel, onRestart, printLabel, onPrint },
+    { conclusion, restartLabel, onRestart, downloadLabel, onDownload },
 ) {
     const restartButton = create("button", "btn btn-primary", restartLabel);
     restartButton.type = "button";
     restartButton.classList.add("restart");
     restartButton.addEventListener("click", onRestart);
     const actions = create("div", "actions");
-    actions.append(printButton(printLabel, onPrint), restartButton);
+    actions.append(downloadButton(downloadLabel, onDownload), restartButton);
     panel.replaceChildren(
         create("p", "panel-lead", conclusion.subtitle),
         ...conclusion.paragraphs.map((text) => create("p", "", text)),

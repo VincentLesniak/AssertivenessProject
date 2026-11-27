@@ -80,7 +80,7 @@
             "title": "Tes résultats au test d'assertivité",
             "date": "Le {date}",
             "postures": "Le détail des 4 postures",
-            "fileName": "Test d'assertivité - résultats - {date}"
+            "fileName": "Test-d-assertivité_mes-résultats_{date}"
         }
     },
     "navigation": {

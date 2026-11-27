@@ -6,7 +6,7 @@ import { CATEGORIES } from "../core/scoring.js";
 import * as Quiz from "../core/quiz.js";
 import * as Save from "../core/save.js";
 import { frenchSpacing } from "../core/typography.js";
-import { printReport } from "./print-report.js";
+import { downloadReport } from "./pdf-report.js";
 import { renderConclusion, renderGrid, renderScores } from "./results-screens.js";
 import { clearSave, readSave, writeSave } from "./storage.js";
 
@@ -105,15 +105,15 @@ export function startSlider(root, content, questions) {
                     selectedPosture = selectedPosture === category ? null : category;
                     render();
                 },
-                onPrint: print,
+                onDownload: downloadPdf,
             });
         } else if (kind === "conclusion") {
             renderConclusion(el.panel, {
                 conclusion: results.conclusion,
                 restartLabel: results.restart,
                 onRestart: () => update(Quiz.restart(quiz)),
-                printLabel: results.print.button,
-                onPrint: print,
+                downloadLabel: results.print.button,
+                onDownload: downloadPdf,
             });
         } else {
             el.panel.replaceChildren();
@@ -172,19 +172,16 @@ export function startSlider(root, content, questions) {
         show(el.next, Quiz.canGoNext(quiz) && !isWelcome);
     }
 
-    function print() {
+    function downloadPdf() {
         const now = new Date();
-        printReport(
-            document.querySelector("#printReport"),
-            {
-                scores: Quiz.scores(quiz),
-                maximum,
-                results,
-                credit: content.credit,
-                date: now.toLocaleDateString("fr-FR", { dateStyle: "long" }),
-            },
-            results.print.fileName.replace("{date}", isoDate(now)),
-        );
+        downloadReport({
+            scores: Quiz.scores(quiz),
+            maximum,
+            results,
+            credit: content.credit,
+            date: now.toLocaleDateString("fr-FR", { dateStyle: "long" }),
+            fileName: results.print.fileName.replace("{date}", isoDate(now)),
+        });
     }
 
     function resumeLabel(intro) {
