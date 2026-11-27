@@ -9,8 +9,9 @@
     display: none !important;
 }
 
+/* Pas de hauteur minimale à 100vh : sur mobile, 100vh compte aussi la barre d'adresse
+   et créait un défilement vers une zone vide. Le fond couvre quand même tout l'écran. */
 body {
-    min-height: 100vh;
     /* Pas de surlignage bleu au toucher sur mobile */
     -webkit-tap-highlight-color: transparent;
     background: var(--color-bg);

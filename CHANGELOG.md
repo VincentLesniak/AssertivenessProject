@@ -5,6 +5,12 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ## [Non publié]
 
+## [0.5.5] - 2026-11-27
+
+### Corrigé
+
+- Sur mobile, la page ne défile plus vers une zone vide sous le contenu.
+
 ## [0.5.4] - 2026-11-27
 
 ### Ajouté
@@ -128,7 +134,8 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 - `results.html` et `results.js`, qui ne fonctionnaient pas ; leurs textes sont conservés dans `src/data/content.json` pour la v0.3.0.
 
-[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.4...HEAD
+[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.5...HEAD
+[0.5.5]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.4...v0.5.5
 [0.5.4]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.3...v0.5.4
 [0.5.3]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.1...v0.5.2
