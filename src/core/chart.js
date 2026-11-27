@@ -29,3 +29,24 @@ export function barGeometry(score, maximum, index, count, plot, gapRatio = 0.4) 
 export function valueToY(value, maximum, plot) {
     return plot.top + plot.height - (value / maximum) * plot.height;
 }
+
+/**
+ * Tracé SVG d'une barre aux coins du haut arrondis et à la base plate,
+ * posée sur l'axe. Le rayon est réduit si la barre est trop basse ou trop étroite.
+ */
+export function barPath({ x, y, width, height }, radius = 4) {
+    if (height <= 0 || width <= 0) {
+        return "";
+    }
+    const r = Math.min(radius, width / 2, height);
+    const bottom = y + height;
+    return [
+        `M${x},${bottom}`,
+        `V${y + r}`,
+        `Q${x},${y} ${x + r},${y}`,
+        `H${x + width - r}`,
+        `Q${x + width},${y} ${x + width},${y + r}`,
+        `V${bottom}`,
+        "Z",
+    ].join(" ");
+}

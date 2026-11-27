@@ -2,7 +2,7 @@
  * Écrans de résultats : grille d'analyse, histogramme avec détail par posture, conclusion.
  * Chaque fonction remplit le conteneur `panel` et ne garde aucun état global.
  */
-import { barGeometry, ticks, valueToY } from "../core/chart.js";
+import { barGeometry, barPath, ticks, valueToY } from "../core/chart.js";
 import { CATEGORIES } from "../core/scoring.js";
 import { frenchSpacing } from "../core/typography.js";
 
@@ -70,12 +70,8 @@ function buildChart(scores, maximum, labels) {
         const bar = barGeometry(scores[category], maximum, index, CATEGORIES.length, PLOT, 0.3);
         const inside = bar.height >= 22;
         chart.append(
-            svg("rect", {
-                x: bar.x,
-                y: bar.y,
-                width: bar.width,
-                height: bar.height,
-                rx: 4,
+            svg("path", {
+                d: barPath(bar, 4),
                 class: "chart-bar",
                 style: `fill: ${postureColor(category)}`,
             }),

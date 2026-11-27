@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { barGeometry, ticks, valueToY } from "./chart.js";
+import { barGeometry, barPath, ticks, valueToY } from "./chart.js";
 
 const plot = { left: 40, top: 10, width: 400, height: 150 };
 
@@ -43,5 +43,22 @@ describe("valueToY", () => {
     it("place 0 en bas et le maximum en haut", () => {
         expect(valueToY(0, 15, plot)).toBe(160);
         expect(valueToY(15, 15, plot)).toBe(10);
+    });
+});
+
+describe("barPath", () => {
+    it("arrondit le haut et garde une base plate sur l'axe", () => {
+        const path = barPath({ x: 10, y: 20, width: 40, height: 100 }, 4);
+        expect(path).toBe("M10,120 V24 Q10,20 14,20 H46 Q50,20 50,24 V120 Z");
+    });
+
+    it("réduit le rayon d'une barre très basse", () => {
+        expect(barPath({ x: 0, y: 98, width: 40, height: 2 }, 4)).toBe(
+            "M0,100 V100 Q0,98 2,98 H38 Q40,98 40,100 V100 Z",
+        );
+    });
+
+    it("ne trace rien pour un score nul", () => {
+        expect(barPath({ x: 0, y: 100, width: 40, height: 0 })).toBe("");
     });
 });

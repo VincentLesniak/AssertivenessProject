@@ -10,6 +10,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 ### Corrigé
 
 - Les boutons « Plutôt faux » et « Plutôt vrai » restent au même endroit d'une question à l'autre : la question occupe toujours la hauteur de la plus longue, texte centré.
+- Barres de l'histogramme posées à plat sur l'axe : seuls les coins du haut sont arrondis.
 
 ## [0.4.0] - 2026-11-27
 
