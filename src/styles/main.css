@@ -139,6 +139,9 @@ h1 {
     font: inherit;
     font-weight: 600;
     cursor: pointer;
+    transition:
+        background-color 0.15s ease-out,
+        color 0.15s ease-out;
 }
 
 .btn-primary,
@@ -300,7 +303,8 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
     .chart-bar,
     .chart-value,
-    .progress-bar {
+    .progress-bar,
+    .btn {
         animation: none;
         transition: none;
     }

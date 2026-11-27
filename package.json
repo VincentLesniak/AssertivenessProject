@@ -1,6 +1,6 @@
 {
     "name": "assertiveness-project",
-    "version": "0.5.3",
+    "version": "0.5.4",
     "private": true,
     "description": "Auto-diagnostic d'assertivité en 60 questions",
     "type": "module",
