@@ -10,6 +10,11 @@ import { downloadReport } from "./pdf-report.js";
 import { renderConclusion, renderGrid, renderScores } from "./results-screens.js";
 import { clearSave, readSave, writeSave } from "./storage.js";
 
+/** Durée pendant laquelle la réponse choisie reste affichée avant la question suivante. */
+const ANSWER_FEEDBACK_MS = 200;
+/** Durée de la vibration au choix d'une réponse. */
+const VIBRATION_MS = 15;
+
 export function startSlider(root, content, questions) {
     const $ = (id) => root.querySelector(`#${id}`);
     const el = {
@@ -43,6 +48,8 @@ export function startSlider(root, content, questions) {
     // Dernière diapositive vue hors de l'accueil : c'est là que « Reprendre » ramène
     let resumeIndex = saved ? saved.index : 0;
     let selectedPosture = null;
+    // Vrai pendant le court instant où la réponse choisie reste affichée
+    let answering = false;
 
     const setText = (element, text) => {
         element.textContent = frenchSpacing(text);
@@ -214,21 +221,39 @@ export function startSlider(root, content, questions) {
     }
 
     function goNext() {
-        if (Quiz.canGoNext(quiz) && quiz.index !== 0) {
+        if (!answering && Quiz.canGoNext(quiz) && quiz.index !== 0) {
             update(Quiz.goNext(quiz));
         }
     }
 
     function goPrevious() {
-        if (Quiz.canGoPrevious(quiz)) {
+        if (!answering && Quiz.canGoPrevious(quiz)) {
             update(Quiz.goPrevious(quiz));
         }
     }
 
+    /**
+     * Le bouton choisi se remplit avec sa coche pendant un court instant,
+     * puis la question suivante s'affiche. Les autres actions attendent la fin.
+     */
     function answer(isTrue) {
-        if (Quiz.currentKind(quiz) === "question") {
-            update(Quiz.answer(quiz, isTrue));
+        if (answering || Quiz.currentKind(quiz) !== "question") {
+            return;
         }
+        answering = true;
+        // Petite vibration sur les téléphones qui le permettent (Android ; pas sur iPhone)
+        navigator.vibrate?.(VIBRATION_MS);
+        for (const [button, value] of [
+            [el.answerFalse, false],
+            [el.answerTrue, true],
+        ]) {
+            button.classList.toggle("is-selected", value === isTrue);
+            button.setAttribute("aria-pressed", String(value === isTrue));
+        }
+        setTimeout(() => {
+            answering = false;
+            update(Quiz.answer(quiz, isTrue));
+        }, ANSWER_FEEDBACK_MS);
     }
 
     // Raccourcis : V ou F pour répondre, flèches gauche et droite pour naviguer
