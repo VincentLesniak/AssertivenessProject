@@ -15,7 +15,7 @@ La v1.0.0 est une application statique, sans compte ni serveur, hébergée sur G
 | 7   | Données                       | Questions en JSON (`id`, `text`, `category`), séparées du code                                  |
 | 8   | Sauvegarde locale             | `localStorage` pour reprendre un test ; aucune donnée ne quitte le navigateur                   |
 | 9   | Graphique                     | Histogramme maison en SVG/CSS                                                                   |
-| 10  | « Sauvegarder mes résultats » | Export PDF via une feuille de style d'impression                                                |
+| 10  | « Sauvegarder mes résultats » | PDF téléchargé directement (jsPDF chargé au clic, v0.5.1)                                       |
 | 11  | Accessibilité                 | Objectif WCAG 2.1 AA                                                                            |
 | 12  | Suivi                         | GitHub Issues, un milestone par version, un tableau GitHub Projects                             |
 | 13  | Licence du code               | Tous droits réservés                                                                            |

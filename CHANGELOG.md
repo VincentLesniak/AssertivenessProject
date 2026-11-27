@@ -5,6 +5,16 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ## [Non publié]
 
+## [0.5.1] - 2026-11-27
+
+### Modifié
+
+- « Enregistrer en PDF » télécharge directement le fichier `Test-d-assertivite_mes-resultats_AAAA-MM-JJ.pdf`, sans passer par la fenêtre d'impression. Le PDF est généré avec jsPDF, chargé seulement au clic.
+
+### Supprimé
+
+- Feuille de style d'impression, remplacée par la génération directe du PDF.
+
 ## [0.5.0] - 2026-11-27
 
 ### Ajouté
@@ -98,7 +108,8 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 - `results.html` et `results.js`, qui ne fonctionnaient pas ; leurs textes sont conservés dans `src/data/content.json` pour la v0.3.0.
 
-[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.0...HEAD
+[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.3.0...v0.4.0
