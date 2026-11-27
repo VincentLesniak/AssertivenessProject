@@ -81,7 +81,8 @@ function buildChart(scores, maximum, labels) {
                     x: bar.x + bar.width / 2,
                     y: inside ? bar.y + 15 : bar.y - 5,
                     class: "chart-value",
-                    style: `fill: ${inside ? "var(--color-on-primary)" : "var(--color-text)"}`,
+                    // --rise : distance parcourue par le chiffre pendant que la barre pousse
+                    style: `fill: ${inside ? "var(--color-on-primary)" : "var(--color-text)"}; --rise: ${bar.height}px`,
                 },
                 String(scores[category]),
             ),
