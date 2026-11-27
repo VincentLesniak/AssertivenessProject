@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { barGeometry, barPath, ticks, valueToY } from "./chart.js";
+import { barGeometry, barPath, countAt, easeOut, ticks, valueToY } from "./chart.js";
 
 const plot = { left: 40, top: 10, width: 400, height: 150 };
 
@@ -60,5 +60,22 @@ describe("barPath", () => {
 
     it("ne trace rien pour un score nul", () => {
         expect(barPath({ x: 0, y: 100, width: 40, height: 0 })).toBe("");
+    });
+});
+
+describe("easeOut", () => {
+    it("part de 0, finit à 1 et ralentit à la fin", () => {
+        expect(easeOut(0)).toBe(0);
+        expect(easeOut(1)).toBe(1);
+        expect(easeOut(0.5)).toBeGreaterThan(0.5);
+        expect(easeOut(0.5)).toBeCloseTo(0.684, 2);
+    });
+});
+
+describe("countAt", () => {
+    it("compte de 0 jusqu'au score", () => {
+        expect(countAt(12, 0)).toBe(0);
+        expect(countAt(12, 1)).toBe(12);
+        expect(countAt(12, 0.5)).toBe(8);
     });
 });

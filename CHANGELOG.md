@@ -9,7 +9,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ### Corrigé
 
-- Les chiffres de l'histogramme montent en même temps que leur barre, au lieu d'apparaître directement à leur place.
+- Les chiffres de l'histogramme montent avec leur barre et comptent de 0 jusqu'au score au même rythme, au lieu d'apparaître directement à leur place.
 - Lien de comparaison de la 0.5.0 dans ce fichier (pas de release v0.5.0 publiée).
 
 ## [0.5.1] - 2026-11-27
