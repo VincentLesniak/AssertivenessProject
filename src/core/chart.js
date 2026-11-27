@@ -50,3 +50,35 @@ export function barPath({ x, y, width, height }, radius = 4) {
         "Z",
     ].join(" ");
 }
+
+/**
+ * Courbe CSS « ease-out » (cubic-bezier(0, 0, 0.58, 1)) : progression de 0 à 1
+ * pour un temps t de 0 à 1. Sert à faire défiler les chiffres au rythme des barres.
+ */
+export function easeOut(t) {
+    if (t <= 0) {
+        return 0;
+    }
+    if (t >= 1) {
+        return 1;
+    }
+    // Courbe de Bézier avec P1 = (0, 0) et P2 = (0.58, 1) : on cherche u tel que x(u) = t
+    const x = (u) => 3 * (1 - u) * u * u * 0.58 + u * u * u;
+    let low = 0;
+    let high = 1;
+    for (let i = 0; i < 30; i++) {
+        const u = (low + high) / 2;
+        if (x(u) < t) {
+            low = u;
+        } else {
+            high = u;
+        }
+    }
+    const u = (low + high) / 2;
+    return 3 * (1 - u) * u * u + u * u * u;
+}
+
+/** Chiffre affiché pendant l'animation : de 0 à `score`, arrondi. */
+export function countAt(score, t) {
+    return Math.round(score * easeOut(t));
+}

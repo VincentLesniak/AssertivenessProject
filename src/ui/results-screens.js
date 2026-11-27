@@ -2,13 +2,15 @@
  * Écrans de résultats : grille d'analyse, histogramme avec détail par posture, conclusion.
  * Chaque fonction remplit le conteneur `panel` et ne garde aucun état global.
  */
-import { barGeometry, barPath, ticks, valueToY } from "../core/chart.js";
+import { barGeometry, barPath, countAt, ticks, valueToY } from "../core/chart.js";
 import { CATEGORIES } from "../core/scoring.js";
 import { frenchSpacing } from "../core/typography.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 const VIEW = { width: 320, height: 190 };
 const PLOT = { left: 26, top: 10, width: 288, height: 170 };
+/** Durée de la pousse des barres, identique à l'animation grow-bar de main.css. */
+const GROW_DURATION = 800;
 
 /** Couleur d'une posture, définie dans tokens.css. */
 export const postureColor = (category) => `var(--color-${category})`;
@@ -81,13 +83,42 @@ function buildChart(scores, maximum, labels) {
                     x: bar.x + bar.width / 2,
                     y: inside ? bar.y + 15 : bar.y - 5,
                     class: "chart-value",
-                    style: `fill: ${inside ? "var(--color-on-primary)" : "var(--color-text)"}`,
+                    "data-score": scores[category],
+                    // --rise : distance parcourue par le chiffre pendant que la barre pousse
+                    style: `fill: ${inside ? "var(--color-on-primary)" : "var(--color-text)"}; --rise: ${bar.height}px`,
                 },
                 String(scores[category]),
             ),
         );
     });
     return chart;
+}
+
+/**
+ * Les chiffres défilent de 0 à leur score pendant que les barres poussent.
+ * Rien ne bouge si « réduire les animations » est activé.
+ */
+function countUp(chart) {
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+        return;
+    }
+    const values = [...chart.querySelectorAll(".chart-value")];
+    for (const value of values) {
+        value.textContent = "0";
+    }
+    let start = null;
+    const step = (now) => {
+        start ??= now;
+        const t = Math.min((now - start) / GROW_DURATION, 1);
+        for (const value of values) {
+            value.textContent = String(countAt(Number(value.dataset.score), t));
+        }
+        if (t < 1 && chart.isConnected) {
+            requestAnimationFrame(step);
+        }
+    };
+    // Première image au prochain affichage, quand l'histogramme est dans la page
+    requestAnimationFrame(step);
 }
 
 /**
@@ -117,6 +148,7 @@ export function renderScores(panel, { scores, maximum, results, selected, onSele
         );
     } else {
         main = buildChart(scores, maximum, labels);
+        countUp(main);
     }
 
     const buttons = create("div", "posture-buttons");
