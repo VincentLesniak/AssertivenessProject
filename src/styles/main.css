@@ -345,9 +345,34 @@ h1 {
     color: var(--color-muted);
 }
 
-.restart {
+/* Conclusion : « Enregistrer en PDF » et « Recommencer » côte à côte */
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+}
+
+.print-button {
     align-self: center;
     min-width: 200px;
+}
+
+.actions .print-button {
+    min-width: 0;
+}
+
+/* Sur petit écran, les deux boutons s'empilent pour ne pas couper leur texte */
+@media (max-width: 480px) {
+    .actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+.privacy {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    text-wrap: balance;
 }
 
 .visually-hidden {
@@ -386,5 +411,112 @@ h1:focus {
 @media (hover: none) and (pointer: coarse) {
     .hint {
         display: none;
+    }
+}
+
+/* Rapport imprimable : invisible à l'écran, seul visible à l'impression */
+.print-report {
+    display: none;
+}
+
+@page {
+    size: A4;
+    margin: 14mm 16mm;
+}
+
+@media print {
+    body {
+        min-height: 0;
+        background: #fff;
+        font-size: 10pt;
+        line-height: 1.45;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    body.is-printing-report .app {
+        display: none;
+    }
+
+    body.is-printing-report .print-report {
+        display: flex;
+        flex-direction: column;
+        gap: 4mm;
+    }
+
+    .print-report *,
+    .print-report *::before {
+        animation: none !important;
+    }
+
+    .print-report h1 {
+        font-size: 18pt;
+        text-align: left;
+    }
+
+    .print-report h2 {
+        font-family: var(--font-display);
+        font-size: 11pt;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-top: 2mm;
+    }
+
+    .print-report h3 {
+        font-size: 10pt;
+    }
+
+    .report-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        border-bottom: 1px solid var(--color-line);
+        padding-bottom: 2mm;
+    }
+
+    .report-date,
+    .report-credit {
+        color: var(--color-muted);
+        font-size: 9pt;
+    }
+
+    .print-report .chart {
+        width: 100mm;
+        align-self: center;
+    }
+
+    .report-postures {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4mm 6mm;
+    }
+
+    .report-postures .posture-card {
+        break-inside: avoid;
+        gap: 1mm;
+        padding-left: 3mm;
+    }
+
+    .print-report p {
+        text-align: justify;
+        hyphens: auto;
+    }
+
+    .print-report .posture-score {
+        text-align: left;
+        font-size: 9pt;
+        font-weight: 700;
+        color: var(--posture-color);
+    }
+
+    .report-conclusion {
+        display: flex;
+        flex-direction: column;
+        gap: 2mm;
+        break-inside: avoid;
+    }
+
+    .print-report .report-credit {
+        text-align: center;
     }
 }

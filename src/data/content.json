@@ -11,7 +11,8 @@
             "start": "Commencer",
             "restart": "Recommencer",
             "resume": "Reprendre (question {n})",
-            "resumeResults": "Revoir mes résultats"
+            "resumeResults": "Revoir mes résultats",
+            "privacy": "Vos réponses restent dans votre navigateur, rien n'est envoyé."
         },
         {
             "title": "RÈGLES",
@@ -73,7 +74,14 @@
             }
         },
         "chartHint": "Touchez une posture pour lire son explication.",
-        "restart": "Recommencer"
+        "restart": "Recommencer",
+        "print": {
+            "button": "Enregistrer en PDF",
+            "title": "Tes résultats au test d'assertivité",
+            "date": "Le {date}",
+            "postures": "Le détail des 4 postures",
+            "fileName": "Test d'assertivité - résultats - {date}"
+        }
     },
     "navigation": {
         "previous": "← Précédent",

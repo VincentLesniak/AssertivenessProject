@@ -6,6 +6,7 @@ import { CATEGORIES } from "../core/scoring.js";
 import * as Quiz from "../core/quiz.js";
 import * as Save from "../core/save.js";
 import { frenchSpacing } from "../core/typography.js";
+import { printReport } from "./print-report.js";
 import { renderConclusion, renderGrid, renderScores } from "./results-screens.js";
 import { clearSave, readSave, writeSave } from "./storage.js";
 
@@ -18,6 +19,7 @@ export function startSlider(root, content, questions) {
         progress: $("progress"),
         progressBar: $("progressBar"),
         subtitle: $("subtitle"),
+        privacy: $("privacy"),
         definitions: $("definitions"),
         questionText: $("questionText"),
         panel: $("panel"),
@@ -103,12 +105,15 @@ export function startSlider(root, content, questions) {
                     selectedPosture = selectedPosture === category ? null : category;
                     render();
                 },
+                onPrint: print,
             });
         } else if (kind === "conclusion") {
             renderConclusion(el.panel, {
                 conclusion: results.conclusion,
                 restartLabel: results.restart,
                 onRestart: () => update(Quiz.restart(quiz)),
+                printLabel: results.print.button,
+                onPrint: print,
             });
         } else {
             el.panel.replaceChildren();
@@ -126,6 +131,8 @@ export function startSlider(root, content, questions) {
         setText(el.subtitle, intro.subtitle);
         show(el.subtitle, Boolean(intro.subtitle));
         renderDefinitions(intro.definitions);
+        setText(el.privacy, intro.privacy);
+        show(el.privacy, Boolean(intro.privacy));
 
         show(el.questionText, Boolean(question));
         setText(el.questionText, question?.text);
@@ -163,6 +170,21 @@ export function startSlider(root, content, questions) {
 
         show(el.previous, Quiz.canGoPrevious(quiz));
         show(el.next, Quiz.canGoNext(quiz) && !isWelcome);
+    }
+
+    function print() {
+        const now = new Date();
+        printReport(
+            document.querySelector("#printReport"),
+            {
+                scores: Quiz.scores(quiz),
+                maximum,
+                results,
+                credit: content.credit,
+                date: now.toLocaleDateString("fr-FR", { dateStyle: "long" }),
+            },
+            results.print.fileName.replace("{date}", isoDate(now)),
+        );
     }
 
     function resumeLabel(intro) {
@@ -275,4 +297,10 @@ export function startSlider(root, content, questions) {
     reserveQuestionHeight();
     // Les polices changent la largeur du texte : on remesure une fois chargées
     document.fonts?.ready.then(reserveQuestionHeight);
+}
+
+/** Date locale au format 2026-11-27, pour le nom du fichier. */
+function isoDate(date) {
+    const pad = (number) => String(number).padStart(2, "0");
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }

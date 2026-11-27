@@ -5,6 +5,14 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ## [Non publié]
 
+## [0.5.0] - 2026-11-27
+
+### Ajouté
+
+- Bouton « Enregistrer en PDF » sur l'écran des résultats et sur la conclusion : la fenêtre d'impression du navigateur produit une page A4 avec la date, l'histogramme, les 4 postures et leur score, la conclusion et le crédit du livre. Aucune bibliothèque ajoutée.
+- Mention sur l'accueil : « Vos réponses restent dans votre navigateur, rien n'est envoyé. »
+- Captures dans `docs/screens/v0.5.0/`, avec un aperçu du PDF.
+
 ## [0.4.1] - 2026-11-27
 
 ### Corrigé
@@ -90,7 +98,8 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 - `results.html` et `results.js`, qui ne fonctionnaient pas ; leurs textes sont conservés dans `src/data/content.json` pour la v0.3.0.
 
-[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.1...HEAD
+[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.2.0...v0.3.0
