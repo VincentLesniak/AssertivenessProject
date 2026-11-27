@@ -5,6 +5,13 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 ## [Non publié]
 
+## [0.4.1] - 2026-11-27
+
+### Corrigé
+
+- Les boutons « Plutôt faux » et « Plutôt vrai » restent au même endroit d'une question à l'autre : la question occupe toujours la hauteur de la plus longue, texte centré.
+- Barres de l'histogramme posées à plat sur l'axe : seuls les coins du haut sont arrondis.
+
 ## [0.4.0] - 2026-11-27
 
 ### Ajouté
@@ -83,7 +90,8 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions : [S
 
 - `results.html` et `results.js`, qui ne fonctionnaient pas ; leurs textes sont conservés dans `src/data/content.json` pour la v0.3.0.
 
-[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.0...HEAD
+[Non publié]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/VincentLesniak/AssertivenessProject/compare/v0.1.0...v0.2.0

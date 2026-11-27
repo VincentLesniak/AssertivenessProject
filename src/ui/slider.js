@@ -235,5 +235,44 @@ export function startSlider(root, content, questions) {
     el.answerFalse.addEventListener("click", () => answer(false));
     el.answerTrue.addEventListener("click", () => answer(true));
 
+    /**
+     * Réserve à la question la hauteur de la plus longue des 60, à la largeur actuelle :
+     * les boutons de réponse restent au même endroit d'une question à l'autre.
+     */
+    function reserveQuestionHeight() {
+        const probe = el.questionText.cloneNode();
+        probe.removeAttribute("id");
+        probe.hidden = false;
+        probe.setAttribute("aria-hidden", "true");
+        Object.assign(probe.style, {
+            position: "absolute",
+            visibility: "hidden",
+            minHeight: "0",
+            width: `${el.questionText.parentElement.clientWidth - paddingX(el.questionText.parentElement)}px`,
+        });
+        el.questionText.parentElement.append(probe);
+        let tallest = 0;
+        for (const question of questions) {
+            probe.textContent = frenchSpacing(question.text);
+            tallest = Math.max(tallest, probe.getBoundingClientRect().height);
+        }
+        probe.remove();
+        el.questionText.style.minHeight = `${Math.ceil(tallest)}px`;
+    }
+
+    function paddingX(element) {
+        const style = getComputedStyle(element);
+        return parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+    }
+
+    let resizeFrame = 0;
+    window.addEventListener("resize", () => {
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(reserveQuestionHeight);
+    });
+
     render();
+    reserveQuestionHeight();
+    // Les polices changent la largeur du texte : on remesure une fois chargées
+    document.fonts?.ready.then(reserveQuestionHeight);
 }
